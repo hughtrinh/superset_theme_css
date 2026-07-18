@@ -1,0 +1,355 @@
+.dashboard-markdown * table {
+    border-collapse: collapse;
+}
+
+.dashboard-markdown * table, .dashboard-markdown * th, .dashboard-markdown * td {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+/* ============================================
+   Custom Superset Dashboard Styles
+   Light flat design with bordered charts
+   High Contrast Version
+   ============================================ */
+
+/* Dashboard Container */
+.dashboard {
+  background-color: #e8ecf1;
+}
+
+/* Đôi màu background cho dashboard */
+.dashboard-content {
+  background-color: #edf6f9 !important; 
+}
+/* ------------------------------------- */
+
+
+.dashboard-header {
+  background-color: #caf0f8 !important;
+  border-bottom: 1px solid #c5d0dc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-component-tabs {
+  background-color: #ffffff; /* đổi nền của thanh Tab page */
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid #c5d0dc !important;
+}
+
+/* Grid Layout */
+.dashboard-grid,
+.grid-container {
+  background-color: transparent;
+}
+
+/* Chart Container - ONLY ONE BORDER */
+.dashboard-component {
+  background-color: #ffffff ; 
+  border: 1px solid #b8c5d6;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Chart Header - NO BORDER */
+.chart-header {
+  background-color: transparent;
+  border: none;
+}
+
+.chart-header h4,
+.dashboard-chart-title {
+  color: #1a2332;
+}
+
+/* Chart Slice - NO BORDER */
+.chart-slice {
+  background-color: transparent;
+  border: none;
+}
+
+.slice_container {
+  background-color: transparent;
+  border: none;
+}
+
+/* Dashboard Tabs */
+.dashboard-component-tabs-content {
+  background-color: transparent;
+}
+
+.nav-tabs {
+  border-bottom: 2px solid #c5d0dc;
+}
+
+.nav-tabs .nav-link {
+  color: #3d4f5f;
+  border: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-tabs .nav-link.active {
+  color: #1976d2;
+  background-color: transparent;
+  border-bottom: 2px solid #1976d2;
+}
+
+/* Dashboard Rows & Columns */
+.dashboard-component-chart-holder,
+.grid-row,
+.grid-column {
+  background-color: transparent;
+}
+
+/* Chart Visualization Area - NO BORDER */
+.superset-legacy-chart-container,
+.chart-canvas {
+  background-color: transparent;
+  border: none;
+}
+
+/* Filter Box */
+.filter_box,
+.dashboard-filter-container {
+  background-color: #ffffff;
+  border: 1px solid #b8c5d6;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Specific Chart Types */
+.table-chart,
+.pivot-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  border: none;
+}
+
+.table-chart thead {
+  background-color: #f0f4f8;
+  color: #1a2332;
+}
+
+.table-chart tbody tr {
+  border-bottom: 1px solid #d9e2ec;
+}
+
+.table-chart tbody tr:hover {
+  background-color: #e8f0f8;
+}
+
+/* Bar/Line Chart SVG Elements - NO BORDER */
+.chart-container svg {
+  border: none;
+}
+
+/* Loading State */
+.loading-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #c5d0dc;
+}
+
+/* Dashboard Text */
+.dashboard-markdown,
+.dashboard-component-header , 
+.dashboard-component-divider {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+
+/* Colors for Better Contrast */
+.metric-text {
+  color: #1565c0;
+}
+
+.positive-value {
+  color: #2e7d32;
+}
+
+.negative-value {
+  color: #c62828;
+}
+
+/* Remove Default Shadows on Dashboard Components */
+.dragdroppable-row,
+.dragdroppable-column,
+.resizable-container {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Header Controls */
+.header-with-actions {
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+/* =============================
+   Smooth Hover + Lift Effect
+============================= */
+.dashboard-component {
+  background-color: #ffffff;
+  border: 1px solid #b8c5d6;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+}
+
+.dashboard-component:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  border-color: #90caf9;
+}
+
+/* =============================
+   Fade-in Animation (load chart)
+============================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-component {
+  animation: fadeInUp 0.4s ease;
+}
+
+/* =============================
+   Table Hover + Smooth Highlight
+============================= */
+.table-chart tbody tr {
+  border-bottom: 1px solid #d9e2ec;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.table-chart tbody tr:hover {
+  background-color: #e3f2fd;
+  transform: scale(1.01);
+}
+
+/* =============================
+   Tabs Animation
+============================= */
+.nav-tabs .nav-link {
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-tabs .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #1976d2;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-tabs .nav-link:hover::after {
+  width: 60%;
+}
+
+.nav-tabs .nav-link.active::after {
+  width: 100%;
+}
+
+/* =============================
+   Filter Box Focus Effect
+============================= */
+.filter_box,
+.dashboard-filter-container {
+  transition: all 0.25s ease;
+}
+
+.filter_box:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  border-color: #90caf9;
+}
+
+/* =============================
+   Loading Pulse Effect
+============================= */
+@keyframes pulse {
+  0% {
+    background-color: #f0f4f8;
+  }
+  50% {
+    background-color: #e0e7ef;
+  }
+  100% {
+    background-color: #f0f4f8;
+  }
+}
+
+.loading-container {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* =============================
+   Smooth Scroll (nice UX)
+============================= */
+html {
+  scroll-behavior: smooth;
+}
+
+/*==============================================
+                KPI Number
+================================================*/
+/* center value full card */
+div[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* center value đúng (không phá layout) */
+.superset-legacy-chart-big-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VALUE chính (Big Number) */
+.superset-legacy-chart-big-number .header-line {
+  font-size: 20px !important; /* Cỡ chữ KPI */
+  text-align: center;
+  font-weight: 400 !important;
+
+}
+
+/* SUB LABEL */
+.subheader-line {
+  font-size: 14px !important;
+  text-align: center ;
+  white-space: nowrap;
+}
+
+/* BigNumber text */
+.big-number {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #1f3b57 !important;
+}
+
+/* Label KPI */
+.big-number-subheader {
+    font-size: 13px !important;
+    color: #6b7a90 !important;
+}
