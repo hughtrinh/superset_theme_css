@@ -113,29 +113,93 @@
   width: 100%;
 }
 
-/* Chart cards — do not turn tabs/markdown/dividers into cards */
-.dashboard-component:not(.dashboard-component-tabs):not(.dashboard-component-header):not(.dashboard-component-divider):not(.dashboard-markdown) {
-  overflow: hidden;
+/* =========================================================
+   CHART CARD — CHỈ TẠO 1 KHUNG NGOÀI
+   ========================================================= */
+
+.dashboard-component-chart-holder {
+  overflow: hidden !important;
   background-color: var(--card-bg) !important;
   border: 1px solid var(--card-border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--shadow-card) !important;
   transform: none !important;
-  transition: transform 0.22s ease, box-shadow 0.22s ease,
-              border-color 0.22s ease !important;
-  animation: dashboard-fade-in 0.35s ease both;
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease !important;
 }
 
-.dashboard-component:not(.dashboard-component-tabs):not(.dashboard-component-header):not(.dashboard-component-divider):not(.dashboard-markdown):hover {
+.dashboard-component-chart-holder:hover {
   border-color: var(--card-border-hover) !important;
   box-shadow: var(--shadow-hover) !important;
   transform: translateY(-2px) !important;
 }
 
-/* Chart title: view and edit modes */
-.chart-header {
-  background-color: transparent !important;
+
+/* =========================================================
+   XÓA KHUNG THỪA BÊN TRONG CHART
+   ========================================================= */
+
+.dashboard-component-chart-holder .chart-header,
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title,
+.dashboard-component-chart-holder .editable-title--editable,
+.dashboard-component-chart-holder .chart-slice,
+.dashboard-component-chart-holder .slice_container,
+.dashboard-component-chart-holder .superset-legacy-chart-container,
+.dashboard-component-chart-holder .superset-legacy-chart-big-number,
+.dashboard-component-chart-holder .header-line,
+.dashboard-component-chart-holder .subheader-line,
+.dashboard-component-chart-holder .big-number {
+  background: transparent !important;
   border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  transform: none !important;
+}
+
+
+/* =========================================================
+   CHART TITLE
+   ========================================================= */
+
+.chart-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-start !important;
+
+  width: 100% !important;
+  min-height: 44px !important;
+
+  /* Chừa chỗ cho nút ba chấm */
+  padding: 8px 42px 6px 12px !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title,
+.dashboard-component-chart-holder .editable-title--editable {
+  flex: 1 1 auto !important;
+
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  text-align: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 .chart-header h4,
@@ -143,20 +207,63 @@
 .dashboard-component-chart-holder .header-title,
 .dashboard-component-chart-holder .editable-title a,
 .dashboard-component-chart-holder .editable-title--editable {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
   color: var(--text-main) !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   line-height: 1.35 !important;
+  text-align: center !important;
+
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-.chart-slice,
-.slice_container,
-.superset-legacy-chart-container,
-.chart-canvas,
-.chart-container svg {
-  background-color: transparent !important;
+
+/* =========================================================
+   BIG NUMBER — KHÔNG TẠO KHUNG CON
+   ========================================================= */
+
+.superset-legacy-chart-big-number {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  text-align: center !important;
+  background: transparent !important;
   border: 0 !important;
+  box-shadow: none !important;
 }
+
+.superset-legacy-chart-big-number .header-line,
+.superset-legacy-chart-big-number .big-number {
+  width: 100% !important;
+
+  color: var(--metric) !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.08 !important;
+  text-align: center !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
 
 /* Filters */
 .filter_box,
