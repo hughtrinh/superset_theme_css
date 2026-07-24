@@ -1,20 +1,5 @@
 /* ========================================================================
-   SUPERSET THEME 04 — EXECUTIVE AZURE PRO VISIBLE (LAYOUT SAFE)
-   Phong cách tham chiếu: Power BI / Looker / dashboard điều hành hiện đại
-
-   CÁCH DÙNG
-   1. Xóa CSS theme cũ trong Dashboard properties > CSS.
-   2. Dán TOÀN BỘ file này, không dán nối tiếp theme cũ.
-   3. Lưu dashboard và tải lại trang bằng Ctrl + F5.
-
-   GHI CHÚ
-   - Tối ưu cho Superset dùng Native Filter và ECharts.
-   - Không đặt width, height, min-width, max-width, padding hoặc overflow
-     lên các lớp layout/grid do Superset quản lý.
-   - Kích thước chart chỉ được điều chỉnh bằng giao diện Edit Dashboard.
-   - :has() được dùng để nhận diện KPI card; Chrome/Edge hiện đại hỗ trợ tốt.
-   - CSS xử lý giao diện. Mật độ nhãn, palette từng series và cách sắp xếp
-     category nên cấu hình thêm trong từng chart.
+    THEME: OCEAN
    ======================================================================== */
 
 :root {
@@ -68,6 +53,12 @@
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Nền khu vực chứa KPI và chart bên trong tab */
+.dashboard-component-tabs-content,
+.dashboard-grid {
+  background-color: #f3f6fa !important;
 }
 
 /* ========================================================================
