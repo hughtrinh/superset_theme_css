@@ -1,147 +1,354 @@
-/* ====================================================================
-   SUPERSET THEME 01 — OCEAN GOVERNMENT
-   Light blue, clear, suitable for public-sector and executive dashboards
-   ==================================================================== */
+
 
 :root {
-  --dash-bg: #edf6f9;
-  --dash-header: #caf0f8;
-  --card-bg: #ffffff;
-  --card-border: #b8c5d6;
-  --card-border-hover: #79b9d2;
-  --soft-bg: #f0f7fa;
-  --soft-hover: #e3f2f7;
-  --text-main: #1a2332;
-  --text-soft: #526477;
-  --primary: #1976d2;
-  --primary-dark: #125ca5;
-  --metric: #1565c0;
-  --positive: #2e7d32;
-  --negative: #c62828;
-  --radius-card: 12px;
-  --radius-control: 8px;
-  --shadow-card: 0 2px 7px rgba(27, 58, 85, 0.08);
-  --shadow-hover: 0 7px 17px rgba(27, 58, 85, 0.13);
+  /* Canvas */
+  --dash-bg: #f4f7fb;
+  --dash-bg-accent: #eef4ff;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --surface-selected: #eff6ff;
+
+  /* Borders */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #93c5fd;
+
+  /* Typography */
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Brand and data colors */
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-soft: #dbeafe;
+  --cyan: #0891b2;
+  --teal: #0f766e;
+  --positive: #15803d;
+  --positive-soft: #dcfce7;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --negative: #dc2626;
+  --negative-soft: #fee2e2;
+  --violet: #7c3aed;
+
+  /* Shape and depth */
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --radius-pill: 999px;
+  --shadow-card:
+    0 1px 2px rgba(15, 23, 42, 0.04), 0 5px 16px rgba(15, 23, 42, 0.055);
+  --shadow-hover:
+    0 2px 4px rgba(15, 23, 42, 0.05), 0 12px 26px rgba(37, 99, 235, 0.09);
+  --shadow-popover: 0 12px 30px rgba(15, 23, 42, 0.14);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Dashboard and canvas */
+/* ========================================================================
+   01. GLOBAL AND CANVAS
+   ======================================================================== */
+
 .dashboard,
-.dashboard-content {
-  background-color: var(--dash-bg) !important;
-  color: var(--text-main) !important;
+.dashboard-content,
+.dashboard .dashboard-content {
+  color: var(--text) !important;
+  background:
+    radial-gradient(
+      circle at 88% 4%,
+      rgba(37, 99, 235, 0.055) 0,
+      rgba(37, 99, 235, 0) 24%
+    ),
+    var(--dash-bg) !important;
+  font-family:
+    Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .dashboard-grid,
 .grid-container,
 .dashboard-component-tabs-content,
-.dashboard-component-chart-holder,
 .grid-row,
 .grid-column,
 .dragdroppable-row,
 .dragdroppable-column,
 .resizable-container {
-  background-color: transparent !important;
+  background: transparent !important;
+  border: 0 !important;
   box-shadow: none !important;
 }
 
-/* Dashboard header */
+/* Giữ khoảng cách card gọn nhưng không bị dính */
+.dashboard-component-chart-holder,
+.dashboard-component-tabs,
+.dashboard-markdown {
+  box-sizing: border-box !important;
+}
+
+/* ========================================================================
+   02. DASHBOARD HEADER
+   ======================================================================== */
+
 .dashboard-header {
-  background-color: var(--dash-header) !important;
-  border-bottom: 1px solid var(--card-border) !important;
-  box-shadow: 0 1px 4px rgba(27, 58, 85, 0.08) !important;
-}
-
-.header-with-actions {
-  background-color: var(--card-bg) !important;
-  border-radius: var(--radius-control) !important;
-}
-
-/* Tabs: explicitly remove card styling from the parent tab component */
-.dashboard-component-tabs {
-  background-color: var(--card-bg) !important;
+  position: relative;
+  z-index: 20;
+  min-height: 48px !important;
+  background: rgba(255, 255, 255, 0.94) !important;
   border: 0 !important;
-  border-bottom: 1px solid var(--card-border) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02) !important;
+  backdrop-filter: blur(12px);
+}
+
+.dashboard-header .header-with-actions,
+.header-with-actions {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.dashboard-header h1,
+.dashboard-header .header-title,
+.dashboard-header .editable-title,
+.dashboard-header .editable-title a {
+  color: var(--text) !important;
+  font-size: 18px !important;
+  font-weight: 720 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Header buttons */
+.dashboard-header button,
+.dashboard-header [role="button"] {
+  border-radius: 8px !important;
+  transition:
+    color 160ms var(--ease),
+    background-color 160ms var(--ease),
+    border-color 160ms var(--ease) !important;
+}
+
+.dashboard-header button:hover,
+.dashboard-header [role="button"]:hover {
+  color: var(--primary) !important;
+  background-color: var(--surface-selected) !important;
+}
+
+/* ========================================================================
+   03. NAVIGATION TABS
+   ======================================================================== */
+
+.dashboard-component-tabs {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
 .nav-tabs {
-  background-color: var(--card-bg) !important;
-  border-bottom: 2px solid var(--card-border) !important;
+  gap: 6px !important;
+  min-height: 40px !important;
+  padding: 0 12px !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.nav-tabs .nav-item {
+  margin: 0 !important;
 }
 
 .nav-tabs .nav-link {
   position: relative;
-  color: var(--text-soft) !important;
-  font-weight: 500 !important;
-  background-color: transparent !important;
+  min-height: 40px !important;
+  padding: 11px 12px 9px !important;
+  color: var(--text-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 580 !important;
+  line-height: 20px !important;
+  background: transparent !important;
   border: 0 !important;
-  border-bottom: 2px solid transparent !important;
-  transition: color 0.2s ease, background-color 0.2s ease !important;
-}
-
-.nav-tabs .nav-link:hover {
-  color: var(--primary) !important;
-  background-color: var(--soft-bg) !important;
-}
-
-.nav-tabs .nav-link.active {
-  color: var(--primary) !important;
-  font-weight: 650 !important;
-  background-color: transparent !important;
-  border-bottom-color: var(--primary) !important;
+  border-radius: 0 !important;
+  transition:
+    color 170ms var(--ease),
+    background-color 170ms var(--ease) !important;
 }
 
 .nav-tabs .nav-link::after {
-  content: "";
   position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary);
-  transform: translateX(-50%);
-  transition: width 0.25s ease;
+  right: 12px;
+  bottom: -1px;
+  left: 12px;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--primary), #38bdf8);
+  border-radius: 3px 3px 0 0;
+  opacity: 0;
+  transform: scaleX(0.3);
+  transition:
+    opacity 170ms var(--ease),
+    transform 170ms var(--ease);
 }
 
-.nav-tabs .nav-link:hover::after {
-  width: 60%;
+.nav-tabs .nav-link:hover {
+  color: var(--primary-dark) !important;
+  background: var(--surface-selected) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-dark) !important;
+  font-weight: 700 !important;
+  background: transparent !important;
 }
 
 .nav-tabs .nav-link.active::after {
-  width: 100%;
+  opacity: 1;
+  transform: scaleX(1);
 }
 
-/* =========================================================
-   CHART CARD — CHỈ TẠO 1 KHUNG NGOÀI
-   ========================================================= */
+/* ========================================================================
+   04. FILTER PANEL
+   ======================================================================== */
+
+.filter_box,
+.dashboard-filter-container,
+.native-filters-container,
+[data-test="filter-bar"] {
+  color: var(--text) !important;
+  background: rgba(255, 255, 255, 0.97) !important;
+  border: 0 !important;
+  border-right: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  box-shadow: 6px 0 22px rgba(15, 23, 42, 0.035) !important;
+}
+
+.native-filters-container h3,
+.native-filters-container h4,
+[data-test="filter-bar"] h3,
+[data-test="filter-bar"] h4 {
+  color: var(--text) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.native-filters-container label,
+[data-test="filter-bar"] label {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+}
+
+/* Inputs, selects and date controls */
+.native-filters-container input,
+.native-filters-container .ant-select-selector,
+.native-filters-container .Select-control,
+[data-test="filter-bar"] input,
+[data-test="filter-bar"] .ant-select-selector,
+[data-test="filter-bar"] .Select-control {
+  min-height: 36px !important;
+  color: var(--text) !important;
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-control) !important;
+  box-shadow: none !important;
+  transition:
+    background-color 160ms var(--ease),
+    border-color 160ms var(--ease),
+    box-shadow 160ms var(--ease) !important;
+}
+
+.native-filters-container input:hover,
+.native-filters-container .ant-select-selector:hover,
+[data-test="filter-bar"] input:hover,
+[data-test="filter-bar"] .ant-select-selector:hover {
+  background: var(--surface) !important;
+  border-color: var(--border-strong) !important;
+}
+
+.native-filters-container input:focus,
+.native-filters-container .ant-select-focused .ant-select-selector,
+[data-test="filter-bar"] input:focus,
+[data-test="filter-bar"] .ant-select-focused .ant-select-selector {
+  background: var(--surface) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+  outline: 0 !important;
+}
+
+/* Filter action buttons */
+.native-filters-container button,
+[data-test="filter-bar"] button {
+  min-height: 34px !important;
+  border-radius: 9px !important;
+  font-weight: 650 !important;
+}
+
+.native-filters-container button[type="submit"],
+[data-test="filter-bar"] button[type="submit"] {
+  color: var(--text-inverse) !important;
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark)
+  ) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Dropdown / popover */
+.ant-select-dropdown,
+.ant-popover-inner,
+.popover,
+[role="listbox"] {
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-popover) !important;
+}
+
+.ant-select-item-option-selected,
+.ant-select-item-option-active,
+[role="option"][aria-selected="true"] {
+  color: var(--primary-dark) !important;
+  background: var(--surface-selected) !important;
+}
+
+/* ========================================================================
+   05. CHART CARDS
+   ======================================================================== */
 
 .dashboard-component-chart-holder {
+  position: relative !important;
   overflow: hidden !important;
-  background-color: var(--card-bg) !important;
-  border: 1px solid var(--card-border) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
   box-shadow: var(--shadow-card) !important;
-  transform: none !important;
-
   transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    border-color 0.22s ease !important;
+    border-color 190ms var(--ease),
+    box-shadow 190ms var(--ease),
+    transform 190ms var(--ease) !important;
 }
 
 .dashboard-component-chart-holder:hover {
-  border-color: var(--card-border-hover) !important;
+  border-color: var(--border-focus) !important;
   box-shadow: var(--shadow-hover) !important;
   transform: translateY(-2px) !important;
 }
 
+/* Trong Edit Dashboard, giữ card đứng yên để kéo-thả chính xác */
+.dashboard--editing .dashboard-component-chart-holder:hover,
+.dashboard.edit-mode .dashboard-component-chart-holder:hover {
+  transform: none !important;
+}
 
-/* =========================================================
-   XÓA KHUNG THỪA BÊN TRONG CHART
-   ========================================================= */
-
+/* Xóa toàn bộ khung thừa bên trong chart */
 .dashboard-component-chart-holder .chart-header,
 .dashboard-component-chart-holder .header-title,
 .dashboard-component-chart-holder .editable-title,
@@ -158,29 +365,30 @@
   border-radius: 0 !important;
   box-shadow: none !important;
   outline: 0 !important;
-  transform: none !important;
 }
 
+.dashboard-component-chart-holder .chart-slice,
+.dashboard-component-chart-holder .slice_container {
+  padding-right: 2px !important;
+  padding-bottom: 2px !important;
+  padding-left: 2px !important;
+}
 
-/* =========================================================
-   CHART TITLE
-   ========================================================= */
+/* ========================================================================
+   06. CHART TITLES AND ACTIONS
+   ======================================================================== */
 
 .chart-header {
   position: relative !important;
   display: flex !important;
-  align-items: flex-start !important;
-
+  align-items: center !important;
   width: 100% !important;
-  min-height: 44px !important;
-
-  /* Chừa chỗ cho nút ba chấm */
-  padding: 8px 42px 6px 12px !important;
-
+  min-height: 46px !important;
+  padding: 12px 44px 8px 16px !important;
+  overflow: hidden !important;
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  overflow: hidden !important;
   box-sizing: border-box !important;
 }
 
@@ -188,18 +396,12 @@
 .dashboard-component-chart-holder .editable-title,
 .dashboard-component-chart-holder .editable-title--editable {
   flex: 1 1 auto !important;
-
   width: auto !important;
-  max-width: 100% !important;
   min-width: 0 !important;
-
+  max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
-
-  text-align: center !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  text-align: left !important;
 }
 
 .chart-header h4,
@@ -208,87 +410,222 @@
 .dashboard-component-chart-holder .editable-title a,
 .dashboard-component-chart-holder .editable-title--editable {
   display: block !important;
-
   width: 100% !important;
   max-width: 100% !important;
-
-  color: var(--text-main) !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
+  margin: 0 !important;
+  color: var(--text) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
   line-height: 1.35 !important;
-  text-align: center !important;
-
+  text-align: left !important;
+  letter-spacing: -0.012em !important;
   white-space: normal !important;
   overflow: visible !important;
-  text-overflow: clip !important;
   overflow-wrap: break-word !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  text-overflow: clip !important;
 }
 
+/* Nút ba chấm và action icon dịu hơn */
+.chart-header button,
+.chart-header [role="button"] {
+  color: var(--text-muted) !important;
+  border-radius: 8px !important;
+}
 
-/* =========================================================
-   BIG NUMBER — KHÔNG TẠO KHUNG CON
-   ========================================================= */
+.chart-header button:hover,
+.chart-header [role="button"]:hover {
+  color: var(--primary) !important;
+  background: var(--surface-selected) !important;
+}
 
-.superset-legacy-chart-big-number {
+/* ========================================================================
+   07. KPI / BIG NUMBER CARDS
+   ======================================================================== */
+
+/* Dải màu nhận diện KPI */
+.dashboard-component-chart-holder:has(
+    .superset-legacy-chart-big-number
+  )::before,
+.dashboard-component-chart-holder:has(
+    [data-test-viz-type="big_number_total"]
+  )::before,
+.dashboard-component-chart-holder:has(.big-number)::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 4px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    #38bdf8 70%,
+    #67e8f9 100%
+  );
+}
+
+/* Ánh sáng rất nhẹ, chỉ dành cho KPI */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)::after,
+.dashboard-component-chart-holder:has(
+    [data-test-viz-type="big_number_total"]
+  )::after {
+  position: absolute;
+  top: -44px;
+  right: -42px;
+  width: 130px;
+  height: 130px;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.12) 0,
+    rgba(56, 189, 248, 0) 70%
+  );
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header {
+  min-height: 39px !important;
+  padding: 14px 42px 2px 18px !important;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header
+  h4,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .header-title,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .editable-title
+  a,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header
+  h4 {
+  color: var(--text-secondary) !important;
+  font-size: 12.5px !important;
+  font-weight: 650 !important;
+  text-align: left !important;
+}
+
+.superset-legacy-chart-big-number,
+div[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number {
   display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
+  align-items: flex-start !important;
   justify-content: center !important;
-
   width: 100% !important;
   height: 100% !important;
-
-  text-align: center !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  padding: 4px 18px 16px !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
 }
 
 .superset-legacy-chart-big-number .header-line,
-.superset-legacy-chart-big-number .big-number {
+.superset-legacy-chart-big-number .big-number,
+.big-number {
   width: 100% !important;
-
-  color: var(--metric) !important;
-  font-size: 28px !important;
-  font-weight: 700 !important;
+  margin: 0 !important;
+  color: var(--primary-dark) !important;
+  font-size: clamp(24px, 1.65vw, 34px) !important;
+  font-weight: 760 !important;
   line-height: 1.08 !important;
-  text-align: center !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  text-align: left !important;
+  letter-spacing: -0.035em !important;
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Filters */
-.filter_box,
-.dashboard-filter-container,
-.native-filters-container,
-[data-test="filter-bar"] {
-  background-color: var(--card-bg) !important;
-  border: 1px solid var(--card-border) !important;
-  border-radius: var(--radius-card) !important;
-  box-shadow: var(--shadow-card) !important;
-  transition: box-shadow 0.22s ease, border-color 0.22s ease !important;
+.superset-legacy-chart-big-number .subheader-line,
+.subheader-line,
+.big-number-subheader {
+  width: 100% !important;
+  margin-top: 5px !important;
+  color: var(--text-muted) !important;
+  font-size: 11.5px !important;
+  font-weight: 550 !important;
+  line-height: 1.3 !important;
+  text-align: left !important;
 }
 
-.filter_box:hover,
-.dashboard-filter-container:hover {
-  border-color: var(--card-border-hover) !important;
-  box-shadow: var(--shadow-hover) !important;
+.metric-text {
+  color: var(--primary-dark) !important;
 }
 
-/* Tables and markdown tables */
+.positive-value {
+  color: var(--positive) !important;
+}
+
+.negative-value {
+  color: var(--negative) !important;
+}
+
+/* Comparison badge nếu Big Number có phần trăm tăng/giảm */
+.superset-legacy-chart-big-number .trend-line,
+.superset-legacy-chart-big-number .comparison {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  margin-top: 7px !important;
+  padding: 3px 8px !important;
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 650 !important;
+  background: var(--surface-soft) !important;
+  border-radius: var(--radius-pill) !important;
+}
+
+/* ========================================================================
+   08. CHART CONTENT, AXES AND LEGENDS
+   ======================================================================== */
+
+.dashboard-component-chart-holder svg text {
+  font-family:
+    Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  fill: var(--text-secondary);
+}
+
+/* SVG grid line — ECharts canvas cần chỉnh trong Explore */
+.dashboard-component-chart-holder svg .tick line,
+.dashboard-component-chart-holder svg .grid-line,
+.dashboard-component-chart-holder svg [class*="grid"] line {
+  stroke: var(--border) !important;
+  stroke-opacity: 0.72 !important;
+}
+
+.dashboard-component-chart-holder svg .domain {
+  stroke: var(--border-strong) !important;
+  stroke-opacity: 0.8 !important;
+}
+
+.dashboard-component-chart-holder .legend,
+.dashboard-component-chart-holder [class*="legend"] {
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+}
+
+/* Tooltip của chart */
+.dashboard-component-chart-holder .tooltip,
+.dashboard-component-chart-holder [class*="tooltip"] {
+  color: var(--text) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-popover) !important;
+}
+
+/* ========================================================================
+   09. TABLES AND PIVOT TABLES
+   ======================================================================== */
+
 .dashboard-markdown table,
 .table-chart,
 .pivot-table {
   width: 100%;
   overflow: hidden;
-  border: 1px solid var(--card-border) !important;
+  color: var(--text) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
   border-collapse: separate !important;
   border-spacing: 0 !important;
   border-radius: var(--radius-control) !important;
@@ -296,9 +633,14 @@
 
 .dashboard-markdown th,
 .table-chart thead,
-.pivot-table thead {
-  color: var(--text-main) !important;
-  background-color: var(--soft-bg) !important;
+.pivot-table thead,
+.table-chart thead th,
+.pivot-table thead th {
+  color: var(--text-secondary) !important;
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  background: var(--surface-soft) !important;
 }
 
 .dashboard-markdown th,
@@ -307,107 +649,191 @@
 .table-chart td,
 .pivot-table th,
 .pivot-table td {
-  padding: 8px 10px !important;
+  padding: 9px 11px !important;
   border: 0 !important;
-  border-bottom: 1px solid var(--card-border) !important;
+  border-bottom: 1px solid var(--border) !important;
+  font-variant-numeric: tabular-nums;
 }
 
 .table-chart tbody tr,
 .pivot-table tbody tr,
 .dashboard-markdown tbody tr {
-  transition: background-color 0.18s ease !important;
+  transition: background-color 150ms var(--ease) !important;
+}
+
+.table-chart tbody tr:nth-child(even),
+.pivot-table tbody tr:nth-child(even),
+.dashboard-markdown tbody tr:nth-child(even) {
+  background: #fbfdff !important;
 }
 
 .table-chart tbody tr:hover,
 .pivot-table tbody tr:hover,
 .dashboard-markdown tbody tr:hover {
-  background-color: var(--soft-hover) !important;
-  transform: none !important;
+  background: var(--surface-selected) !important;
 }
 
-/* Markdown, section headers and dividers are not cards */
+/* ========================================================================
+   10. MARKDOWN, SECTION HEADERS AND DIVIDERS
+   ======================================================================== */
+
 .dashboard-markdown,
 .dashboard-component-header,
 .dashboard-component-divider {
-  color: var(--text-main) !important;
-  background-color: transparent !important;
+  color: var(--text) !important;
+  background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
-/* KPI cards */
-div[data-test-viz-type="big_number_total"]
-.superset-legacy-chart-big-number,
-.superset-legacy-chart-big-number {
-  width: 100% !important;
-  height: 100% !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-
-  align-items: center !important;     /* Căn giữa theo chiều ngang */
-  justify-content: center !important; /* Căn giữa theo chiều dọc */
-
-  text-align: center !important;
+.dashboard-component-header {
+  padding: 8px 4px 4px !important;
 }
 
-.superset-legacy-chart-big-number .header-line,
-.big-number {
-  width: 100% !important;
-  color: var(--metric) !important;
-  font-size: 28px !important;
-  font-weight: 700 !important;
-  line-height: 1.08 !important;
-  text-align: center !important;
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header h3,
+.dashboard-markdown h1,
+.dashboard-markdown h2,
+.dashboard-markdown h3 {
+  margin: 0 !important;
+  color: var(--text) !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.025em !important;
 }
 
-.superset-legacy-chart-big-number .subheader-line,
-.subheader-line,
-.big-number-subheader {
-  width: 100% !important;
-  color: var(--text-soft) !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  text-align: center !important;
+.dashboard-component-header h2,
+.dashboard-markdown h2 {
+  font-size: 18px !important;
 }
 
-.big-number {
-  color: var(--metric) !important;
-  font-size: 28px !important;
-  font-weight: 700 !important;
+.dashboard-component-header h3,
+.dashboard-markdown h3 {
+  font-size: 15px !important;
 }
 
-.metric-text { color: var(--metric) !important; }
-.positive-value { color: var(--positive) !important; }
-.negative-value { color: var(--negative) !important; }
+.dashboard-component-divider {
+  border-top: 1px solid var(--border) !important;
+}
 
-/* Loading */
+/* ========================================================================
+   11. EMPTY, ERROR AND LOADING STATES
+   ======================================================================== */
+
 .loading-container {
-  background-color: var(--soft-bg) !important;
-  border: 1px solid var(--card-border) !important;
+  overflow: hidden;
+  background: linear-gradient(
+    100deg,
+    var(--surface-soft) 20%,
+    #ffffff 38%,
+    var(--surface-soft) 56%
+  ) !important;
+  background-size: 220% 100% !important;
+  border: 1px solid var(--border) !important;
   border-radius: var(--radius-card) !important;
-  animation: dashboard-pulse 1.5s ease-in-out infinite;
+  animation: dashboard-shimmer 1.45s linear infinite;
 }
 
-@keyframes dashboard-fade-in {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+.dashboard-component-chart-holder .alert-warning,
+.dashboard-component-chart-holder [class*="warning"] {
+  color: #92400e !important;
+  background: var(--warning-soft) !important;
+  border-color: #fde68a !important;
+  border-radius: 9px !important;
 }
 
-@keyframes dashboard-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+.dashboard-component-chart-holder .alert-danger,
+.dashboard-component-chart-holder [class*="error"] {
+  color: #991b1b !important;
+  background: var(--negative-soft) !important;
+  border-color: #fecaca !important;
+  border-radius: 9px !important;
 }
 
-html { scroll-behavior: smooth; }
+@keyframes dashboard-shimmer {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+/* ========================================================================
+   12. SCROLLBAR
+   ======================================================================== */
+
+.dashboard ::-webkit-scrollbar,
+.native-filters-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dashboard ::-webkit-scrollbar-track,
+.native-filters-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard ::-webkit-scrollbar-thumb,
+.native-filters-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  background-clip: padding-box;
+}
+
+.dashboard ::-webkit-scrollbar-thumb:hover,
+.native-filters-container::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ========================================================================
+   13. RESPONSIVE
+   ======================================================================== */
+
+@media (max-width: 1280px) {
+  .chart-header {
+    min-height: 42px !important;
+    padding: 10px 40px 6px 13px !important;
+  }
+
+  .chart-header h4,
+  .dashboard-chart-title,
+  .dashboard-component-chart-holder .header-title,
+  .dashboard-component-chart-holder .editable-title a {
+    font-size: 13px !important;
+  }
+
+  .superset-legacy-chart-big-number .header-line,
+  .superset-legacy-chart-big-number .big-number,
+  .big-number {
+    font-size: clamp(22px, 2vw, 29px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-component-chart-holder {
+    border-radius: 11px !important;
+  }
+
+  .nav-tabs {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .nav-tabs .nav-link {
+    white-space: nowrap !important;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
-
