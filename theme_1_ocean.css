@@ -1,20 +1,37 @@
+/* ========================================================================
+   SUPERSET THEME 04 — EXECUTIVE AZURE PRO VISIBLE (LAYOUT SAFE)
+   Phong cách tham chiếu: Power BI / Looker / dashboard điều hành hiện đại
 
+   CÁCH DÙNG
+   1. Xóa CSS theme cũ trong Dashboard properties > CSS.
+   2. Dán TOÀN BỘ file này, không dán nối tiếp theme cũ.
+   3. Lưu dashboard và tải lại trang bằng Ctrl + F5.
+
+   GHI CHÚ
+   - Tối ưu cho Superset dùng Native Filter và ECharts.
+   - Không đặt width, height, min-width, max-width, padding hoặc overflow
+     lên các lớp layout/grid do Superset quản lý.
+   - Kích thước chart chỉ được điều chỉnh bằng giao diện Edit Dashboard.
+   - :has() được dùng để nhận diện KPI card; Chrome/Edge hiện đại hỗ trợ tốt.
+   - CSS xử lý giao diện. Mật độ nhãn, palette từng series và cách sắp xếp
+     category nên cấu hình thêm trong từng chart.
+   ======================================================================== */
 
 :root {
   /* Canvas */
-  --dash-bg: #f4f7fb;
-  --dash-bg-accent: #eef4ff;
+  --dash-bg: #edf3fa;
+  --dash-bg-accent: #e0ecff;
 
   /* Surfaces */
   --surface: #ffffff;
-  --surface-soft: #f8fafc;
+  --surface-soft: #f7f9fc;
   --surface-hover: #f1f5f9;
   --surface-selected: #eff6ff;
 
   /* Borders */
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #93c5fd;
+  --border: #d3dfed;
+  --border-strong: #b8c9dd;
+  --border-focus: #60a5fa;
 
   /* Typography */
   --text: #0f172a;
@@ -41,10 +58,13 @@
   --radius-control: 10px;
   --radius-pill: 999px;
   --shadow-card:
-    0 1px 2px rgba(15, 23, 42, 0.04), 0 5px 16px rgba(15, 23, 42, 0.055);
+    0 1px 2px rgba(15, 23, 42, 0.035),
+    0 6px 18px rgba(15, 23, 42, 0.045);
   --shadow-hover:
-    0 2px 4px rgba(15, 23, 42, 0.05), 0 12px 26px rgba(37, 99, 235, 0.09);
+    0 3px 7px rgba(15, 23, 42, 0.055),
+    0 14px 30px rgba(37, 99, 235, 0.11);
   --shadow-popover: 0 12px 30px rgba(15, 23, 42, 0.14);
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.14);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0, 0, 1);
@@ -61,8 +81,13 @@
   background:
     radial-gradient(
       circle at 88% 4%,
-      rgba(37, 99, 235, 0.055) 0,
+      rgba(37, 99, 235, 0.11) 0,
       rgba(37, 99, 235, 0) 24%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.32) 0,
+      rgba(255, 255, 255, 0) 220px
     ),
     var(--dash-bg) !important;
   font-family:
@@ -145,11 +170,15 @@
    ======================================================================== */
 
 .dashboard-component-tabs {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f2f7ff 100%
+  ) !important;
   border: 0 !important;
   border-bottom: 1px solid var(--border) !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.8) !important;
   transform: none !important;
 }
 
@@ -175,7 +204,7 @@
   line-height: 20px !important;
   background: transparent !important;
   border: 0 !important;
-  border-radius: 0 !important;
+  border-radius: 9px 9px 0 0 !important;
   transition:
     color 170ms var(--ease),
     background-color 170ms var(--ease) !important;
@@ -199,13 +228,20 @@
 
 .nav-tabs .nav-link:hover {
   color: var(--primary-dark) !important;
-  background: var(--surface-selected) !important;
+  background: rgba(239, 246, 255, 0.78) !important;
 }
 
 .nav-tabs .nav-link.active {
-  color: var(--primary-dark) !important;
+  color: #1746a2 !important;
   font-weight: 700 !important;
-  background: transparent !important;
+  background: linear-gradient(
+    180deg,
+    #dbeafe 0%,
+    #eff6ff 100%
+  ) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(96, 165, 250, 0.42),
+    0 3px 10px rgba(37, 99, 235, 0.08) !important;
 }
 
 .nav-tabs .nav-link.active::after {
@@ -222,11 +258,17 @@
 .native-filters-container,
 [data-test="filter-bar"] {
   color: var(--text) !important;
-  background: rgba(255, 255, 255, 0.97) !important;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f1f7ff 100%
+  ) !important;
   border: 0 !important;
   border-right: 1px solid var(--border) !important;
   border-radius: 0 !important;
-  box-shadow: 6px 0 22px rgba(15, 23, 42, 0.035) !important;
+  box-shadow:
+    8px 0 28px rgba(15, 23, 42, 0.04),
+    inset -1px 0 0 rgba(255, 255, 255, 0.8) !important;
 }
 
 .native-filters-container h3,
@@ -243,6 +285,7 @@
   color: var(--text-secondary) !important;
   font-size: 12px !important;
   font-weight: 650 !important;
+  letter-spacing: 0.012em !important;
 }
 
 /* Inputs, selects and date controls */
@@ -254,10 +297,12 @@
 [data-test="filter-bar"] .Select-control {
   min-height: 36px !important;
   color: var(--text) !important;
-  background: var(--surface-soft) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   border: 1px solid var(--border) !important;
   border-radius: var(--radius-control) !important;
-  box-shadow: none !important;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
   transition:
     background-color 160ms var(--ease),
     border-color 160ms var(--ease),
@@ -269,7 +314,8 @@
 [data-test="filter-bar"] input:hover,
 [data-test="filter-bar"] .ant-select-selector:hover {
   background: var(--surface) !important;
-  border-color: var(--border-strong) !important;
+  border-color: #a8c7fa !important;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.07) !important;
 }
 
 .native-filters-container input:focus,
@@ -278,7 +324,7 @@
 [data-test="filter-bar"] .ant-select-focused .ant-select-selector {
   background: var(--surface) !important;
   border-color: var(--primary) !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+  box-shadow: var(--focus-ring) !important;
   outline: 0 !important;
 }
 
@@ -326,10 +372,17 @@
 .dashboard-component-chart-holder {
   position: relative !important;
   overflow: hidden !important;
-  background: var(--surface) !important;
-  border: 1px solid var(--border) !important;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0,
+    #ffffff 68%,
+    #f9fbff 100%
+  ) !important;
+  border: 1px solid #cfdaea !important;
   border-radius: var(--radius-card) !important;
-  box-shadow: var(--shadow-card) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    var(--shadow-card) !important;
   transition:
     border-color 190ms var(--ease),
     box-shadow 190ms var(--ease),
@@ -338,8 +391,10 @@
 
 .dashboard-component-chart-holder:hover {
   border-color: var(--border-focus) !important;
-  box-shadow: var(--shadow-hover) !important;
-  transform: translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    var(--shadow-hover) !important;
+  transform: translateY(-3px) !important;
 }
 
 /* Trong Edit Dashboard, giữ card đứng yên để kéo-thả chính xác */
@@ -348,8 +403,7 @@
   transform: none !important;
 }
 
-/* Xóa toàn bộ khung thừa bên trong chart */
-.dashboard-component-chart-holder .chart-header,
+/* Xóa khung thừa bên trong nội dung chart; chart-header được style riêng */
 .dashboard-component-chart-holder .header-title,
 .dashboard-component-chart-holder .editable-title,
 .dashboard-component-chart-holder .editable-title--editable,
@@ -386,10 +440,30 @@
   min-height: 46px !important;
   padding: 12px 44px 8px 16px !important;
   overflow: hidden !important;
-  background: transparent !important;
+  background: linear-gradient(
+    90deg,
+    rgba(239, 246, 255, 0.94) 0%,
+    rgba(248, 251, 255, 0.76) 58%,
+    rgba(255, 255, 255, 0.3) 100%
+  ) !important;
   border: 0 !important;
+  border-bottom: 1px solid rgba(203, 213, 225, 0.58) !important;
   box-shadow: none !important;
   box-sizing: border-box !important;
+}
+
+/* Vạch nhận diện nhỏ giúp title chart có điểm neo thị giác */
+.dashboard-component-chart-holder .chart-header::before {
+  position: absolute;
+  top: 14px;
+  bottom: 10px;
+  left: 7px;
+  width: 4px;
+  content: "";
+  background: linear-gradient(180deg, var(--primary), #38bdf8);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.24);
+  opacity: 1;
 }
 
 .dashboard-component-chart-holder .header-title,
@@ -429,13 +503,23 @@
 .chart-header button,
 .chart-header [role="button"] {
   color: var(--text-muted) !important;
+  background: rgba(248, 250, 252, 0.72) !important;
+  border: 1px solid transparent !important;
   border-radius: 8px !important;
+  opacity: 0.78;
+  transition:
+    color 160ms var(--ease),
+    background-color 160ms var(--ease),
+    border-color 160ms var(--ease),
+    opacity 160ms var(--ease) !important;
 }
 
 .chart-header button:hover,
 .chart-header [role="button"]:hover {
   color: var(--primary) !important;
   background: var(--surface-selected) !important;
+  border-color: rgba(147, 197, 253, 0.42) !important;
+  opacity: 1;
 }
 
 /* ========================================================================
@@ -463,6 +547,46 @@
     #38bdf8 70%,
     #67e8f9 100%
   );
+}
+
+/* KPI có surface riêng, vẫn không chạm vào kích thước của grid */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number),
+.dashboard-component-chart-holder:has(
+    [data-test-viz-type="big_number_total"]
+  ),
+.dashboard-component-chart-holder:has(.big-number) {
+  background: linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #f5f9ff 48%,
+    #e8f2ff 100%
+  ) !important;
+  border-color: #bfd3ee !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 8px 22px rgba(30, 64, 175, 0.09) !important;
+}
+
+/* KPI không dùng vạch title dọc như chart phân tích */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header::before,
+.dashboard-component-chart-holder:has(
+    [data-test-viz-type="big_number_total"]
+  )
+  .chart-header::before,
+.dashboard-component-chart-holder:has(.big-number) .chart-header::before {
+  display: none;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header,
+.dashboard-component-chart-holder:has(
+    [data-test-viz-type="big_number_total"]
+  )
+  .chart-header,
+.dashboard-component-chart-holder:has(.big-number) .chart-header {
+  background: rgba(255, 255, 255, 0.34) !important;
+  border-bottom-color: rgba(191, 211, 238, 0.72) !important;
 }
 
 /* Ánh sáng rất nhẹ, chỉ dành cho KPI */
@@ -527,13 +651,14 @@ div[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number {
 .big-number {
   width: 100% !important;
   margin: 0 !important;
-  color: var(--primary-dark) !important;
+  color: #1746b8 !important;
   font-size: clamp(24px, 1.65vw, 34px) !important;
   font-weight: 760 !important;
   line-height: 1.08 !important;
   text-align: left !important;
   letter-spacing: -0.035em !important;
   font-variant-numeric: tabular-nums lining-nums;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .superset-legacy-chart-big-number .subheader-line,
@@ -602,6 +727,17 @@ div[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number {
 .dashboard-component-chart-holder [class*="legend"] {
   color: var(--text-secondary) !important;
   font-size: 11px !important;
+  font-weight: 550 !important;
+}
+
+/* Focus rõ ràng cho người dùng bàn phím */
+.dashboard button:focus-visible,
+.dashboard [role="button"]:focus-visible,
+.dashboard a:focus-visible,
+.native-filters-container input:focus-visible,
+[data-test="filter-bar"] input:focus-visible {
+  outline: 0 !important;
+  box-shadow: var(--focus-ring) !important;
 }
 
 /* Tooltip của chart */
