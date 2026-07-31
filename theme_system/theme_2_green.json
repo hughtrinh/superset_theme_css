@@ -1,0 +1,64 @@
+{
+  "token": {
+    "colorPrimary": "#2e7d32",
+    "colorInfo": "#2e7d32",
+    "colorSuccess": "#2e7d32",
+    "colorWarning": "#c47b16",
+    "colorError": "#dc2626",
+
+    "colorBgBase": "#edf7ee",
+    "colorBgContainer": "#ffffff",
+    "colorBgElevated": "#ffffff",
+    "colorBgLayout": "#edf7ee",
+
+    "colorTextBase": "#17351f",
+    "colorText": "#17351f",
+    "colorTextSecondary": "#49634f",
+    "colorTextTertiary": "#8aa08e",
+
+    "colorBorder": "#cddfce",
+    "colorBorderSecondary": "#aac5ad",
+
+    "colorLink": "#2e7d32",
+    "colorLinkHover": "#1b5e20",
+    "colorLinkActive": "#1b5e20",
+
+    "borderRadius": 10,
+    "borderRadiusLG": 14,
+    "borderRadiusSM": 8,
+
+    "fontFamily": "Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+  },
+  "components": {
+    "Button": {
+      "borderRadius": 9,
+      "primaryShadow": "0 5px 12px rgba(46, 125, 50, 0.20)"
+    },
+    "Card": {
+      "borderRadiusLG": 14,
+      "colorBorderSecondary": "#c7dbc9"
+    },
+    "Input": {
+      "borderRadius": 10,
+      "activeBorderColor": "#2e7d32",
+      "hoverBorderColor": "#66a96b"
+    },
+    "Select": {
+      "borderRadius": 10,
+      "optionSelectedBg": "#e9f5ea",
+      "optionSelectedColor": "#1b5e20"
+    },
+    "Tabs": {
+      "itemColor": "#49634f",
+      "itemSelectedColor": "#1b5e20",
+      "itemHoverColor": "#2e7d32",
+      "inkBarColor": "#2e7d32"
+    },
+    "Table": {
+      "headerBg": "#2e7d32",
+      "headerColor": "#ffffff",
+      "rowHoverBg": "#dff1e0",
+      "borderColor": "#cddfce"
+    }
+  }
+}

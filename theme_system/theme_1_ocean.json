@@ -1,0 +1,37 @@
+{
+  "token": {
+    "colorPrimary": "#1f67d2",
+    "colorInfo": "#1f67d2",
+    "colorSuccess": "#168557",
+    "colorWarning": "#cf7a0a",
+    "colorError": "#cf3f4d",
+
+    "colorBgBase": "#dceafb",
+    "colorBgLayout": "#dceafb",
+    "colorBgContainer": "#ffffff",
+    "colorBgElevated": "#ffffff",
+
+    "colorTextBase": "#10233f",
+    "colorText": "#10233f",
+    "colorTextSecondary": "#4f6279",
+    "colorTextTertiary": "#8797aa",
+
+    "colorBorder": "#cbdced",
+    "colorBorderSecondary": "#afc8e3",
+
+    "colorLink": "#1f67d2",
+    "colorLinkHover": "#154fa8",
+    "colorLinkActive": "#154fa8",
+
+    "borderRadius": 10,
+    "borderRadiusLG": 16,
+    "borderRadiusSM": 8,
+
+    "controlHeight": 38,
+    "fontSize": 14,
+
+    "fontFamily": "Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif",
+
+    "wireframe": false
+  }
+}

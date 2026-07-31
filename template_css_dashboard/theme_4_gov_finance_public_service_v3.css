@@ -1,0 +1,2718 @@
+/* ==========================================================================
+   SUPERSET THEME — GOVERNMENT FINANCE & PUBLIC SERVICES V3 RUBY WHITE
+   Phiên bản đỏ hồng nhạt cho dashboard Sở Tài chính, Hành chính công và Dịch vụ công
+   ========================================================================== */
+
+:root {
+  /* =========================
+     01. COLOR TOKENS
+     ========================= */
+
+  /* Nền ngoài / nền trong */
+  --gov-canvas: #fff4f6;
+  --gov-canvas-deep: #f8e4e8;
+  --gov-workspace: #fff8f9;
+  --gov-surface: #ffffff;
+  --gov-surface-soft: #fffafb;
+  --gov-surface-selected: #fceef1;
+
+  /* Chữ */
+  --gov-text: #3b2530;
+  --gov-text-secondary: #735761;
+  --gov-text-muted: #a18b93;
+  --gov-text-inverse: #ffffff;
+
+  /* Viền */
+  --gov-border: #efd8dd;
+  --gov-border-strong: #dfbcc5;
+  --gov-border-focus: #d47282;
+
+  /* Màu thương hiệu */
+  --gov-primary: #c45d70;
+  --gov-primary-dark: #7b2f41;
+  --gov-primary-soft: #fbe8ec;
+  --gov-cyan: #d88a91;
+  --gov-teal: #b85e73;
+  --gov-violet: #a26f91;
+
+  /* Trạng thái */
+  --gov-positive: #4f8a68;
+  --gov-positive-soft: #eaf6ef;
+  --gov-warning: #bd7d20;
+  --gov-warning-soft: #fff4dd;
+  --gov-negative: #c95063;
+  --gov-negative-soft: #fde8ec;
+
+  /* Màu dữ liệu nghiệp vụ: hồ sơ, tiến độ, tài chính */
+  --gov-series-1: #d47282;
+  --gov-series-2: #b85e73;
+  --gov-series-3: #d79a3f;
+  --gov-series-4: #a8789b;
+  --gov-series-5: #c95063;
+
+  /* Shape */
+  --gov-radius-card: 12px;
+  --gov-radius-control: 8px;
+  --gov-radius-section: 10px;
+  --gov-radius-pill: 999px;
+
+  /* Shadow */
+  --gov-shadow-card:
+    0 2px 4px rgba(127, 48, 67, 0.040),
+    0 9px 24px rgba(127, 48, 67, 0.065);
+
+  --gov-shadow-hover:
+    0 5px 10px rgba(127, 48, 67, 0.055),
+    0 18px 38px rgba(196, 93, 112, 0.14);
+
+  --gov-shadow-filter:
+    8px 0 28px rgba(92, 48, 61, 0.05);
+
+  --gov-shadow-popover:
+    0 16px 34px rgba(92, 48, 61, 0.14);
+
+  --gov-focus-ring:
+    0 0 0 3px rgba(196, 93, 112, 0.14);
+
+  --gov-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ==========================================================================
+   02. GLOBAL CANVAS
+   ========================================================================== */
+
+.dashboard,
+.dashboard-content,
+.dashboard .dashboard-content {
+  color: var(--gov-text) !important;
+  background:
+    radial-gradient(
+      circle at 88% 4%,
+      rgba(212, 114, 130, 0.10) 0,
+      rgba(212, 114, 130, 0) 27%
+    ),
+    radial-gradient(
+      circle at 7% 88%,
+      rgba(79, 138, 104, 0.06) 0,
+      rgba(79, 138, 104, 0) 23%
+    ),
+    linear-gradient(
+      180deg,
+      #fff4f6 0%,
+      #fff7f8 46%,
+      #f9e9ed 100%
+    ) !important;
+
+  font-family:
+    Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Nền làm việc bên trong tab */
+.dashboard-component-tabs-content {
+  background:
+    linear-gradient(
+      180deg,
+      #fff2f4 0%,
+      #fff9fa 48%,
+      #fceff2 100%
+    ) !important;
+
+  border-radius: 0 0 18px 18px !important;
+}
+
+/* Không tạo thêm khối nền lên row/column */
+.dashboard-grid,
+.grid-container,
+.grid-row,
+.grid-column,
+.dragdroppable-row,
+.dragdroppable-column,
+.resizable-container {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Box model an toàn, không làm chart bị kéo giãn */
+.dashboard-component-chart-holder {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  border: 1px solid #e7cbd1 !important;
+  border-radius: var(--gov-radius-card) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    var(--gov-shadow-card) !important;
+  transition:
+    border-color 190ms var(--gov-ease),
+    box-shadow 190ms var(--gov-ease),
+    transform 190ms var(--gov-ease) !important;
+}
+
+/* ==========================================================================
+   03. DASHBOARD HEADER
+   ========================================================================== */
+
+.dashboard-header {
+  position: relative;
+  z-index: 30;
+  min-height: 52px !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--gov-border) !important;
+  box-shadow:
+    0 1px 0 rgba(92, 48, 61, 0.022),
+    0 6px 18px rgba(92, 48, 61, 0.03) !important;
+  backdrop-filter: blur(14px);
+}
+
+.dashboard-header .header-with-actions,
+.header-with-actions {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.dashboard-header h1,
+.dashboard-header .header-title,
+.dashboard-header .editable-title,
+.dashboard-header .editable-title a {
+  color: var(--gov-text) !important;
+  font-size: 19px !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.dashboard-header button,
+.dashboard-header [role="button"] {
+  border-radius: 9px !important;
+  transition:
+    color 160ms var(--gov-ease),
+    background-color 160ms var(--gov-ease),
+    border-color 160ms var(--gov-ease),
+    box-shadow 160ms var(--gov-ease) !important;
+}
+
+.dashboard-header button:hover,
+.dashboard-header [role="button"]:hover {
+  color: var(--gov-primary) !important;
+  background: var(--gov-surface-selected) !important;
+  box-shadow: 0 3px 10px rgba(196, 93, 112, 0.08) !important;
+}
+
+/* ==========================================================================
+   04. NAVIGATION TABS
+   ========================================================================== */
+
+.dashboard-component-tabs {
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: 10px !important;
+  box-shadow:
+    0 1px 2px rgba(92, 48, 61, 0.03),
+    0 7px 20px rgba(92, 48, 61, 0.04) !important;
+  transform: none !important;
+}
+
+.nav-tabs {
+  gap: 7px !important;
+  min-height: 46px !important;
+  padding: 6px 10px 0 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fffafb 100%
+    ) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--gov-border) !important;
+}
+
+.nav-tabs .nav-item {
+  margin: 0 !important;
+}
+
+.nav-tabs .nav-link {
+  position: relative;
+  min-height: 38px !important;
+  padding: 9px 14px 10px !important;
+  color: var(--gov-text-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 620 !important;
+  line-height: 20px !important;
+  white-space: nowrap !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 9px 9px 0 0 !important;
+
+  transition:
+    color 170ms var(--gov-ease),
+    background-color 170ms var(--gov-ease),
+    box-shadow 170ms var(--gov-ease) !important;
+}
+
+.nav-tabs .nav-link::after {
+  position: absolute;
+  right: 14px;
+  bottom: -1px;
+  left: 14px;
+  height: 3px;
+  content: "";
+  background:
+    linear-gradient(
+      90deg,
+      var(--gov-primary),
+      var(--gov-cyan)
+    );
+  border-radius: 3px 3px 0 0;
+  opacity: 0;
+  transform: scaleX(0.35);
+
+  transition:
+    opacity 170ms var(--gov-ease),
+    transform 170ms var(--gov-ease);
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--gov-primary-dark) !important;
+  background: rgba(232, 240, 245, 0.88) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--gov-primary-dark) !important;
+  font-weight: 740 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #e5eef2 0%,
+      #f6f8f9 100%
+    ) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(212, 114, 130, 0.26),
+    0 4px 12px rgba(196, 93, 112, 0.08) !important;
+}
+
+.nav-tabs .nav-link.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   05. NATIVE FILTER PANEL
+   ========================================================================== */
+
+/*
+  Phần này thu thanh lọc còn khoảng 236px.
+  Nếu phiên bản Superset của bạn điều khiển width bằng inline style quá mạnh,
+  có thể chỉnh con số 236px thành 248px.
+*/
+
+[data-test="filter-bar"] {
+  flex: 0 0 214px !important;
+  width: 214px !important;
+  min-width: 214px !important;
+  max-width: 214px !important;
+}
+
+.filter_box,
+.native-filters-container,
+[data-test="filter-bar"] {
+  color: var(--gov-text) !important;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fffafb 55%,
+      #fceef1 100%
+    ) !important;
+
+  border: 0 !important;
+  border-right: 1px solid var(--gov-border) !important;
+  border-radius: 0 !important;
+  box-shadow:
+    7px 0 24px rgba(92, 48, 61, 0.045),
+    inset -1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Khoảng trong filter gọn hơn */
+.native-filters-container,
+[data-test="filter-bar"] {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.native-filters-container h3,
+.native-filters-container h4,
+[data-test="filter-bar"] h3,
+[data-test="filter-bar"] h4 {
+  margin-bottom: 14px !important;
+  color: var(--gov-text) !important;
+  font-size: 14px !important;
+  font-weight: 760 !important;
+  letter-spacing: -0.015em !important;
+}
+
+.native-filters-container label,
+[data-test="filter-bar"] label {
+  margin-bottom: 6px !important;
+  color: var(--gov-text-secondary) !important;
+  font-size: 11.5px !important;
+  font-weight: 680 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Mỗi filter có khoảng cách đều */
+.native-filters-container form > div,
+[data-test="filter-bar"] form > div {
+  margin-bottom: 14px !important;
+}
+
+/* Input, select, date controls */
+.native-filters-container input,
+.native-filters-container .ant-select-selector,
+.native-filters-container .Select-control,
+[data-test="filter-bar"] input,
+[data-test="filter-bar"] .ant-select-selector,
+[data-test="filter-bar"] .Select-control {
+  min-height: 38px !important;
+  color: var(--gov-text) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: var(--gov-radius-control) !important;
+
+  box-shadow:
+    0 1px 2px rgba(92, 48, 61, 0.022),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+
+  transition:
+    background-color 160ms var(--gov-ease),
+    border-color 160ms var(--gov-ease),
+    box-shadow 160ms var(--gov-ease),
+    transform 160ms var(--gov-ease) !important;
+}
+
+.native-filters-container input:hover,
+.native-filters-container .ant-select-selector:hover,
+[data-test="filter-bar"] input:hover,
+[data-test="filter-bar"] .ant-select-selector:hover {
+  background: var(--gov-surface) !important;
+  border-color: #d38a99 !important;
+  box-shadow: 0 4px 11px rgba(196, 93, 112, 0.08) !important;
+}
+
+.native-filters-container input:focus,
+.native-filters-container .ant-select-focused .ant-select-selector,
+[data-test="filter-bar"] input:focus,
+[data-test="filter-bar"] .ant-select-focused .ant-select-selector {
+  background: var(--gov-surface) !important;
+  border-color: var(--gov-primary) !important;
+  box-shadow: var(--gov-focus-ring) !important;
+  outline: 0 !important;
+}
+
+/* Selected chips */
+.native-filters-container .ant-select-selection-item,
+[data-test="filter-bar"] .ant-select-selection-item {
+  color: var(--gov-primary-dark) !important;
+  font-weight: 620 !important;
+  background: var(--gov-primary-soft) !important;
+  border-radius: 7px !important;
+}
+
+/* Filter buttons */
+.native-filters-container button,
+[data-test="filter-bar"] button {
+  min-height: 35px !important;
+  border-radius: 9px !important;
+  font-size: 12px !important;
+  font-weight: 680 !important;
+}
+
+.native-filters-container button[type="submit"],
+[data-test="filter-bar"] button[type="submit"] {
+  color: var(--gov-text-inverse) !important;
+  background:
+    linear-gradient(
+      135deg,
+      var(--gov-primary),
+      var(--gov-primary-dark)
+    ) !important;
+
+  border-color: var(--gov-primary) !important;
+  box-shadow: 0 6px 14px rgba(196, 93, 112, 0.18) !important;
+}
+
+.native-filters-container button:disabled,
+[data-test="filter-bar"] button:disabled {
+  color: #aa959c !important;
+  background: #faf0f2 !important;
+  border-color: #eedde1 !important;
+  box-shadow: none !important;
+  opacity: 0.9 !important;
+}
+
+/* Dropdown / Popover */
+.ant-select-dropdown,
+.ant-popover-inner,
+.popover,
+[role="listbox"] {
+  background: rgba(255, 255, 255, 0.99) !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--gov-shadow-popover) !important;
+}
+
+.ant-select-item-option-selected,
+.ant-select-item-option-active,
+[role="option"][aria-selected="true"] {
+  color: var(--gov-primary-dark) !important;
+  background: var(--gov-surface-selected) !important;
+}
+
+/* ==========================================================================
+   06. SECTION HEADERS / MARKDOWN TITLES
+   ========================================================================== */
+
+.dashboard-component-header {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 10px 54px 12px !important;
+  overflow: hidden !important;
+
+  color: #7f3043 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffdfd 0%,
+      #fff1f3 52%,
+      #f9e6ea 100%
+    ) !important;
+
+  border: 1px solid #e4c6cd !important;
+  border-radius: 10px !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 6px 17px rgba(127, 48, 67, 0.07) !important;
+
+  transform: none !important;
+}
+
+.dashboard-component-header > div,
+.dashboard-component-header .header-title,
+.dashboard-component-header .editable-title,
+.dashboard-component-header .editable-title--editable {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  text-align: center !important;
+}
+
+.dashboard-component-header::before {
+  display: none !important;
+}
+
+.dashboard-component-header::after {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 74px;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--gov-primary), var(--gov-cyan));
+  border-radius: var(--gov-radius-pill);
+  transform: translateX(-50%);
+  opacity: 0.86;
+}
+
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header h3,
+.dashboard-component-header .header-title,
+.dashboard-component-header .editable-title,
+.dashboard-component-header .editable-title a,
+.dashboard-markdown h1,
+.dashboard-markdown h2,
+.dashboard-markdown h3 {
+  width: 100% !important;
+  margin: 0 !important;
+  color: #7f3043 !important;
+  font-weight: 760 !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+  letter-spacing: -0.02em !important;
+}
+
+.dashboard-component-header h2,
+.dashboard-markdown h2 {
+  font-size: 18px !important;
+}
+
+.dashboard-component-header h3,
+.dashboard-markdown h3 {
+  font-size: 15px !important;
+}
+
+.dashboard-markdown {
+  color: var(--gov-text) !important;
+}
+
+.dashboard-component-divider {
+  border: 0 !important;
+  border-top: 1px solid var(--gov-border) !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   07. CHART CARDS
+   ========================================================================== */
+
+.dashboard-component-chart-holder {
+  position: relative !important;
+  overflow: hidden !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 72%,
+      #fffdfd 100%
+    ) !important;
+
+  border: 1px solid #ecd7dc !important;
+  border-radius: var(--gov-radius-card) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    var(--gov-shadow-card) !important;
+
+  transition:
+    border-color 190ms var(--gov-ease),
+    box-shadow 190ms var(--gov-ease),
+    transform 190ms var(--gov-ease) !important;
+}
+
+.dashboard-component-chart-holder:hover {
+  border-color: #ce7e90 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    var(--gov-shadow-hover) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Edit mode: không nâng card để dễ kéo thả */
+.dashboard--editing .dashboard-component-chart-holder:hover,
+.dashboard.edit-mode .dashboard-component-chart-holder:hover {
+  transform: none !important;
+}
+
+/* Xoá khung con gây cảm giác card lồng card */
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title,
+.dashboard-component-chart-holder .editable-title--editable {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.dashboard-component-chart-holder .chart-slice,
+.dashboard-component-chart-holder .slice_container {
+  padding-right: 3px !important;
+  padding-bottom: 3px !important;
+  padding-left: 3px !important;
+}
+
+/* ==========================================================================
+   08. CHART HEADER / TITLE / ACTIONS
+   ========================================================================== */
+
+.chart-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  padding: 11px 48px 9px !important;
+  overflow: hidden !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdfd 0%,
+      #fceef1 100%
+    ) !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid #efdee2 !important;
+  border-radius: 11px 11px 0 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Vạch neo thị giác cho chart phân tích */
+.dashboard-component-chart-holder .chart-header::before {
+  display: none !important;
+}
+
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title,
+.dashboard-component-chart-holder .editable-title--editable {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.chart-header h4,
+.dashboard-chart-title,
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title a,
+.dashboard-component-chart-holder .editable-title--editable {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  color: #6f3342 !important;
+  font-size: 15px !important;
+  font-weight: 730 !important;
+  line-height: 1.34 !important;
+  text-align: center !important;
+  letter-spacing: -0.012em !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: break-word !important;
+  text-overflow: clip !important;
+}
+
+/* Nút ba chấm / action */
+.chart-header button,
+.chart-header [role="button"] {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 4 !important;
+  color: var(--gov-text-muted) !important;
+  background: rgba(248, 251, 255, 0.82) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  opacity: 0.8;
+  transition:
+    color 160ms var(--gov-ease),
+    background-color 160ms var(--gov-ease),
+    border-color 160ms var(--gov-ease),
+    opacity 160ms var(--gov-ease) !important;
+}
+
+.chart-header button:hover,
+.chart-header [role="button"]:hover {
+  color: var(--gov-primary) !important;
+  background: var(--gov-surface-selected) !important;
+  border-color: rgba(212, 114, 130, 0.34) !important;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   09. KPI / BIG NUMBER CARDS
+   ========================================================================== */
+
+/* Màu mặc định của KPI */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number),
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"]),
+.dashboard-component-chart-holder:has(.big-number) {
+  --kpi-accent: #c45d70;
+  --kpi-accent-rgb: 196, 93, 112;
+
+  background:
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(var(--kpi-accent-rgb), 0.13) 0,
+      rgba(var(--kpi-accent-rgb), 0) 30%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #fff7f8 56%,
+      #f9e8ec 100%
+    ) !important;
+
+  border: 1px solid rgba(var(--kpi-accent-rgb), 0.35) !important;
+  border-radius: var(--gov-radius-card) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 8px 22px rgba(var(--kpi-accent-rgb), 0.10) !important;
+}
+
+/* Dải màu trên KPI */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)::before,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])::before,
+.dashboard-component-chart-holder:has(.big-number)::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 4px;
+  content: "";
+  background:
+    linear-gradient(
+      90deg,
+      var(--kpi-accent) 0%,
+      rgba(var(--kpi-accent-rgb), 0.68) 72%,
+      rgba(var(--kpi-accent-rgb), 0.28) 100%
+    );
+}
+
+/* Ánh sáng trang trí KPI */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)::after,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])::after,
+.dashboard-component-chart-holder:has(.big-number)::after {
+  position: absolute;
+  top: -52px;
+  right: -42px;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  content: "";
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(var(--kpi-accent-rgb), 0.15) 0,
+      rgba(var(--kpi-accent-rgb), 0) 70%
+    );
+}
+
+/* KPI không dùng vạch title dọc */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header::before,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header::before,
+.dashboard-component-chart-holder:has(.big-number)
+  .chart-header::before {
+  display: none !important;
+}
+
+/* Header KPI nhẹ và giữa */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header,
+.dashboard-component-chart-holder:has(.big-number)
+  .chart-header {
+  min-height: 42px !important;
+  padding: 12px 42px 4px !important;
+  background: rgba(255, 255, 255, 0.28) !important;
+  border-bottom-color: rgba(var(--kpi-accent-rgb), 0.16) !important;
+  border-radius: 11px 11px 0 0 !important;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header h4,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .header-title,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .editable-title a,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header h4,
+.dashboard-component-chart-holder:has(.big-number)
+  .chart-header h4 {
+  color: var(--gov-text-secondary) !important;
+  font-size: 13.5px !important;
+  font-weight: 720 !important;
+  line-height: 1.28 !important;
+  text-align: center !important;
+}
+
+.superset-legacy-chart-big-number,
+div[data-test-viz-type="big_number_total"] .superset-legacy-chart-big-number {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 3px 16px 15px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+.superset-legacy-chart-big-number .header-line,
+.superset-legacy-chart-big-number .big-number,
+.big-number {
+  width: 100% !important;
+  margin: 0 !important;
+
+  color: var(--kpi-accent, var(--gov-primary)) !important;
+  font-size: clamp(29px, 1.65vw, 43px) !important;
+  font-weight: 780 !important;
+  line-height: 1.06 !important;
+  text-align: center !important;
+  letter-spacing: -0.038em !important;
+
+  font-variant-numeric: tabular-nums lining-nums;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.superset-legacy-chart-big-number .subheader-line,
+.subheader-line,
+.big-number-subheader {
+  width: 100% !important;
+  margin-top: 5px !important;
+  color: var(--gov-text-muted) !important;
+  font-size: 11px !important;
+  font-weight: 570 !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+/* Comparison badge */
+.superset-legacy-chart-big-number .trend-line,
+.superset-legacy-chart-big-number .comparison {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  margin-top: 7px !important;
+  padding: 3px 8px !important;
+
+  color: var(--gov-text-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 680 !important;
+
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(var(--kpi-accent-rgb), 0.16) !important;
+  border-radius: var(--gov-radius-pill) !important;
+}
+
+/*
+  Tự động tạo 6 màu KPI nếu 6 KPI nằm trong hàng đầu tiên.
+  Nếu cấu trúc DOM của phiên bản Superset không khớp, các KPI vẫn dùng màu xanh mặc định.
+*/
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(1)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(1)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #c45d70;
+  --kpi-accent-rgb: 196, 93, 112;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(2)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(2)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #d47282;
+  --kpi-accent-rgb: 212, 114, 130;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(3)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(3)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #b85e73;
+  --kpi-accent-rgb: 79, 138, 104;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(4)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(4)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #d79a3f;
+  --kpi-accent-rgb: 215, 154, 63;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(5)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(5)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #c95063;
+  --kpi-accent-rgb: 201, 80, 99;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(6)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(6)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #a8789b;
+  --kpi-accent-rgb: 168, 120, 155;
+}
+
+/* ==========================================================================
+   10. CHART CONTENT / AXES / LEGENDS / TOOLTIP
+   ========================================================================== */
+
+.dashboard-component-chart-holder svg text {
+  font-family:
+    Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  fill: var(--gov-text-secondary);
+}
+
+.dashboard-component-chart-holder svg .tick line,
+.dashboard-component-chart-holder svg .grid-line,
+.dashboard-component-chart-holder svg [class*="grid"] line {
+  stroke: var(--gov-border) !important;
+  stroke-opacity: 0.66 !important;
+}
+
+.dashboard-component-chart-holder svg .domain {
+  stroke: var(--gov-border-strong) !important;
+  stroke-opacity: 0.78 !important;
+}
+
+.dashboard-component-chart-holder .legend,
+.dashboard-component-chart-holder [class*="legend"] {
+  color: var(--gov-text-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 580 !important;
+}
+
+.dashboard-component-chart-holder .tooltip,
+.dashboard-component-chart-holder [class*="tooltip"] {
+  color: var(--gov-text) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--gov-shadow-popover) !important;
+}
+
+/* Giá trị tăng/giảm */
+.metric-text {
+  color: var(--gov-primary-dark) !important;
+}
+
+.positive-value {
+  color: var(--gov-positive) !important;
+}
+
+.negative-value {
+  color: var(--gov-negative) !important;
+}
+
+/* ==========================================================================
+   11. TABLE / PIVOT TABLE
+   ========================================================================== */
+
+.dashboard-markdown table,
+.table-chart,
+.pivot-table,
+.dashboard-chart table {
+  width: 100% !important;
+  overflow: hidden !important;
+  color: var(--gov-text) !important;
+  background: var(--gov-surface) !important;
+  border: 1px solid var(--gov-border) !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 0 0 14px 14px !important;
+}
+
+.dashboard-markdown th,
+.table-chart thead,
+.pivot-table thead,
+.table-chart thead th,
+.pivot-table thead th,
+.dashboard-chart th {
+  color: #ffffff !important;
+  font-size: 11.5px !important;
+  font-weight: 720 !important;
+  text-transform: none !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #a8465b 0%,
+      #7c2f42 100%
+    ) !important;
+
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.dashboard-markdown th,
+.dashboard-markdown td,
+.table-chart th,
+.table-chart td,
+.pivot-table th,
+.pivot-table td,
+.dashboard-chart th,
+.dashboard-chart td {
+  padding: 8px 10px !important;
+  border: 0 !important;
+  border-right: 1px solid #f2e4e7 !important;
+  border-bottom: 1px solid #eddbdf !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.table-chart tbody tr,
+.pivot-table tbody tr,
+.dashboard-markdown tbody tr,
+.dashboard-chart tbody tr {
+  transition:
+    background-color 150ms var(--gov-ease),
+    box-shadow 150ms var(--gov-ease) !important;
+}
+
+.table-chart tbody tr:nth-child(even),
+.pivot-table tbody tr:nth-child(even),
+.dashboard-markdown tbody tr:nth-child(even),
+.dashboard-chart tbody tr:nth-child(even) {
+  background: #fffafb !important;
+}
+
+.table-chart tbody tr:hover,
+.pivot-table tbody tr:hover,
+.dashboard-markdown tbody tr:hover,
+.dashboard-chart tbody tr:hover {
+  background: #fff1f3 !important;
+  box-shadow: inset 3px 0 0 var(--gov-primary) !important;
+}
+
+.dashboard-chart td,
+.table-chart td,
+.pivot-table td {
+  color: var(--gov-text) !important;
+  font-weight: 540 !important;
+}
+
+/* Cột đầu tiên nhấn nhẹ, không tô kín từng cột như CSS cũ */
+.dashboard-chart td:first-child,
+.table-chart td:first-child,
+.pivot-table td:first-child {
+  color: #8a3f50 !important;
+  font-weight: 680 !important;
+  background: rgba(220, 234, 240, 0.48) !important;
+}
+
+/* ==========================================================================
+   12. LOADING / EMPTY / ERROR
+   ========================================================================== */
+
+.loading-container {
+  overflow: hidden !important;
+  background:
+    linear-gradient(
+      100deg,
+      var(--gov-surface-soft) 20%,
+      #ffffff 38%,
+      var(--gov-surface-soft) 56%
+    ) !important;
+
+  background-size: 220% 100% !important;
+  border: 1px solid var(--gov-border) !important;
+  border-radius: var(--gov-radius-card) !important;
+  animation: gov-dashboard-shimmer 1.45s linear infinite;
+}
+
+.dashboard-component-chart-holder .alert-warning,
+.dashboard-component-chart-holder [class*="warning"] {
+  color: #9b650f !important;
+  background: var(--gov-warning-soft) !important;
+  border-color: #f2ce86 !important;
+  border-radius: 9px !important;
+}
+
+.dashboard-component-chart-holder .alert-danger,
+.dashboard-component-chart-holder [class*="error"] {
+  color: #9e3247 !important;
+  background: var(--gov-negative-soft) !important;
+  border-color: #efb0bb !important;
+  border-radius: 9px !important;
+}
+
+@keyframes gov-dashboard-shimmer {
+  to {
+    background-position-x: -220%;
+  }
+}
+
+/* ==========================================================================
+   13. FOCUS / ACCESSIBILITY
+   ========================================================================== */
+
+.dashboard button:focus-visible,
+.dashboard [role="button"]:focus-visible,
+.dashboard a:focus-visible,
+.native-filters-container input:focus-visible,
+[data-test="filter-bar"] input:focus-visible {
+  outline: 0 !important;
+  box-shadow: var(--gov-focus-ring) !important;
+}
+
+/* ==========================================================================
+   14. SCROLLBAR
+   ========================================================================== */
+
+.dashboard ::-webkit-scrollbar,
+.native-filters-container::-webkit-scrollbar,
+[data-test="filter-bar"]::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dashboard ::-webkit-scrollbar-track,
+.native-filters-container::-webkit-scrollbar-track,
+[data-test="filter-bar"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard ::-webkit-scrollbar-thumb,
+.native-filters-container::-webkit-scrollbar-thumb,
+[data-test="filter-bar"]::-webkit-scrollbar-thumb {
+  background: #dfc2c9;
+  border: 2px solid transparent;
+  border-radius: var(--gov-radius-pill);
+  background-clip: padding-box;
+}
+
+.dashboard ::-webkit-scrollbar-thumb:hover,
+.native-filters-container::-webkit-scrollbar-thumb:hover,
+[data-test="filter-bar"]::-webkit-scrollbar-thumb:hover {
+  background: #c98e9b;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ==========================================================================
+   15. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1440px) {
+  [data-test="filter-bar"] {
+    flex-basis: 204px !important;
+    width: 204px !important;
+    min-width: 204px !important;
+    max-width: 204px !important;
+  }
+
+  .chart-header {
+    min-height: 42px !important;
+    padding: 10px 40px 7px 16px !important;
+  }
+
+  .chart-header h4,
+  .dashboard-chart-title,
+  .dashboard-component-chart-holder .header-title,
+  .dashboard-component-chart-holder .editable-title a {
+    font-size: 13.5px !important;
+  }
+
+  .superset-legacy-chart-big-number .header-line,
+  .superset-legacy-chart-big-number .big-number,
+  .big-number {
+    font-size: clamp(25px, 2vw, 36px) !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  [data-test="filter-bar"] {
+    flex-basis: 196px !important;
+    width: 196px !important;
+    min-width: 196px !important;
+    max-width: 196px !important;
+  }
+
+  .nav-tabs {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-test="filter-bar"] {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .dashboard-component-tabs,
+  .dashboard-component-chart-holder {
+    border-radius: 11px !important;
+  }
+
+  .nav-tabs {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .nav-tabs .nav-link {
+    white-space: nowrap !important;
+  }
+
+  .chart-header h4,
+  .dashboard-chart-title,
+  .dashboard-component-chart-holder .header-title,
+  .dashboard-component-chart-holder .editable-title a {
+    font-size: 13px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ========================================================================== 
+   16. UI REFINEMENTS — FILTER, TABLE, SINGLE TAB
+   ========================================================================== */
+
+/* Filter controls look like compact mini cards without changing the grid. */
+[data-test="filter-bar"] .ant-select-selector,
+[data-test="filter-bar"] input,
+.native-filters-container .ant-select-selector,
+.native-filters-container input {
+  box-shadow:
+    0 2px 7px rgba(127, 48, 67, 0.040),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92) !important;
+}
+
+/* The inactive out-of-scope line is visually quieter. */
+[data-test="filter-bar"] [class*="out-of-scope"],
+.native-filters-container [class*="out-of-scope"] {
+  color: #aa979e !important;
+  font-size: 11px !important;
+  opacity: 0.78 !important;
+}
+
+/* Sticky table header for long registry tables. */
+.table-chart thead th,
+.pivot-table thead th,
+.dashboard-chart thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 3 !important;
+}
+
+.table-chart thead th:first-child,
+.pivot-table thead th:first-child,
+.dashboard-chart thead th:first-child {
+  border-top-left-radius: 10px !important;
+}
+
+.table-chart thead th:last-child,
+.pivot-table thead th:last-child,
+.dashboard-chart thead th:last-child {
+  border-top-right-radius: 10px !important;
+}
+
+
+/* ==========================================================================
+   HEADER DASHBOARD — KHÔNG VIỀN, KHÔNG BO GÓC
+   ========================================================================== */
+
+/* Xóa toàn bộ khung bao quanh Header */
+.dashboard-component-header {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-height: 54px !important;
+  padding: 10px 48px !important;
+
+  color: #7f3043 !important;
+  background: transparent !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+}
+
+/* Xóa các vạch hoặc hiệu ứng trang trí */
+.dashboard-component-header::before,
+.dashboard-component-header::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Xóa khung ở các phần tử con */
+.dashboard-component-header > div,
+.dashboard-component-header .header-title,
+.dashboard-component-header .editable-title,
+.dashboard-component-header .editable-title--editable {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  text-align: center !important;
+}
+
+
+/* ==========================================================================
+   TIÊU ĐỀ CHÍNH — H1 / H2
+   Ví dụ: TRUNG TÂM ĐIỀU HÀNH GIÁO DỤC THÀNH PHỐ
+   ========================================================================== */
+
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header:has(h1) .header-title,
+.dashboard-component-header:has(h2) .header-title,
+.dashboard-component-header:has(h1) .editable-title a,
+.dashboard-component-header:has(h2) .editable-title a {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #7f3043 !important;
+  font-size: 20px !important;
+  font-weight: 780 !important;
+  line-height: 1.35 !important;
+
+  text-align: center !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* ==========================================================================
+   TIÊU ĐỀ CON — H3
+   Ví dụ: TỔNG QUAN MẠNG LƯỚI TRƯỜNG HỌC
+   ========================================================================== */
+
+.dashboard-component-header:has(h3) {
+  justify-content: flex-start !important;
+
+  min-height: 40px !important;
+  padding: 6px 16px !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.dashboard-component-header:has(h3) > div,
+.dashboard-component-header:has(h3) .header-title,
+.dashboard-component-header:has(h3) .editable-title,
+.dashboard-component-header:has(h3) .editable-title--editable {
+  justify-content: flex-start !important;
+
+  width: 100% !important;
+  text-align: left !important;
+}
+
+.dashboard-component-header h3,
+.dashboard-component-header:has(h3) .header-title,
+.dashboard-component-header:has(h3) .editable-title a,
+.dashboard-component-header:has(h3) .editable-title--editable {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #824252 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+
+  text-align: left !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Không tạo hiệu ứng khung khi hover */
+.dashboard-component-header:hover {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-component-header {
+    min-height: 46px !important;
+    padding: 8px 16px !important;
+  }
+
+  .dashboard-component-header h1,
+  .dashboard-component-header h2,
+  .dashboard-component-header:has(h1) .header-title,
+  .dashboard-component-header:has(h2) .header-title {
+    font-size: 16px !important;
+  }
+
+  .dashboard-component-header h3,
+  .dashboard-component-header:has(h3) .header-title {
+    font-size: 12.5px !important;
+  }
+}
+/* ==========================================================================
+   MARKDOWN SECTION TITLE — FIX ĐÚNG CẤU TRÚC DOM CỦA SUPERSET
+   .dashboard-markdown là THẺ CHA của .dashboard-component-chart-holder
+   ========================================================================== */
+
+/* Xóa khung ở toàn bộ chuỗi bọc Markdown */
+.dashboard-markdown,
+.dashboard-markdown > .resizable-container,
+.dashboard-markdown .dashboard-component-chart-holder {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Ghi đè card chung đang áp dụng cho chart-holder */
+.dashboard-markdown .dashboard-component-chart-holder {
+  position: relative !important;
+  min-height: 40px !important;
+  overflow: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Không nổi card khi hover */
+.dashboard-markdown .dashboard-component-chart-holder:hover {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Tắt pseudo-element nếu theme khác có gắn trang trí */
+.dashboard-markdown .dashboard-component-chart-holder::before,
+.dashboard-markdown .dashboard-component-chart-holder::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Căn nội dung Markdown giống tiêu đề phân khu */
+.dashboard-markdown .dashboard-component-chart-holder {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+}
+
+/* Dòng chữ tiêu đề con */
+.dashboard-markdown .dashboard-component-chart-holder > p,
+.dashboard-markdown p {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #824252 !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  line-height: 1.4 !important;
+  text-align: left !important;
+  letter-spacing: 0.01em !important;
+  text-transform: uppercase !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Optional: uncomment this block only when the dashboard has exactly one tab.
+.nav-tabs:has(.nav-item:only-child) {
+  display: none !important;
+}
+*/
+
+
+/* ==========================================================================
+   17. GOVERNMENT FINANCE / PUBLIC SERVICE ENHANCEMENTS
+   Phong cách: nghiêm túc, tin cậy, dễ đọc, phù hợp báo cáo điều hành
+   ========================================================================== */
+
+/* KPI tài chính và hồ sơ: chữ số rõ, ít trang trí */
+.superset-legacy-chart-big-number .header-line,
+.superset-legacy-chart-big-number .big-number,
+.big-number {
+  font-variant-numeric: tabular-nums lining-nums !important;
+  text-shadow: none !important;
+}
+
+/* Card tài chính cần cảm giác chắc chắn, không quá bóng */
+.dashboard-component-chart-holder {
+  box-shadow:
+    0 1px 2px rgba(92, 48, 61, 0.035),
+    0 7px 18px rgba(92, 48, 61, 0.06) !important;
+}
+
+.dashboard-component-chart-holder:hover {
+  box-shadow:
+    0 2px 4px rgba(92, 48, 61, 0.045),
+    0 12px 26px rgba(196, 93, 112, 0.11) !important;
+}
+
+/* Markdown phân khu không được kế thừa shadow của card */
+.dashboard-markdown .dashboard-component-chart-holder,
+.dashboard-markdown .dashboard-component-chart-holder:hover {
+  box-shadow: none !important;
+}
+
+/* Tiêu đề chart thiên về báo cáo hành chính */
+.chart-header {
+  background:
+    linear-gradient(
+      180deg,
+      #fffdfd 0%,
+      #fff4f6 100%
+    ) !important;
+  border-bottom: 1px solid #ecd7dc !important;
+}
+
+/* Header chính nhấn bằng màu đỏ hồng hành chính */
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header:has(h1) .header-title,
+.dashboard-component-header:has(h2) .header-title,
+.dashboard-component-header:has(h1) .editable-title a,
+.dashboard-component-header:has(h2) .editable-title a {
+  color: #7f3043 !important;
+}
+
+/* Tiêu đề phân khu Markdown: thêm vạch trái nhỏ, không tạo card */
+.dashboard-markdown .dashboard-component-chart-holder {
+  position: relative !important;
+  padding-left: 18px !important;
+}
+
+.dashboard-markdown .dashboard-component-chart-holder::before {
+  position: absolute !important;
+  top: 9px !important;
+  bottom: 9px !important;
+  left: 4px !important;
+  display: block !important;
+  width: 3px !important;
+  content: "" !important;
+  background: linear-gradient(180deg, #c45d70, #e08a96) !important;
+  border-radius: 999px !important;
+}
+
+/* Trạng thái phổ biến trong hành chính công / dịch vụ công */
+.status-success,
+.status-completed,
+.status-on-time {
+  color: #4f8a68 !important;
+  background: #eaf6ef !important;
+}
+
+.status-warning,
+.status-processing,
+.status-pending {
+  color: #9c6715 !important;
+  background: #fff4dd !important;
+}
+
+.status-danger,
+.status-overdue,
+.status-rejected {
+  color: #a73c50 !important;
+  background: #fde8ec !important;
+}
+
+/* Bảng nghiệp vụ: header tối, dữ liệu dễ rà soát */
+.table-chart thead th,
+.pivot-table thead th,
+.dashboard-chart thead th {
+  background:
+    linear-gradient(
+      180deg,
+      #a8465b 0%,
+      #7c2f42 100%
+    ) !important;
+}
+
+/* Cột số tài chính căn phải nếu Superset render class numeric */
+.table-chart td.text-right,
+.pivot-table td.text-right,
+.dashboard-chart td.text-right,
+.table-chart td[class*="numeric"],
+.pivot-table td[class*="numeric"],
+.dashboard-chart td[class*="numeric"] {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums lining-nums !important;
+}
+
+/* Link và thành phần tương tác */
+.dashboard a {
+  color: #c45d70;
+}
+
+.dashboard a:hover {
+  color: #7b2f41;
+}
+
+/* In báo cáo: bỏ nền màu và shadow để tiết kiệm mực */
+@media print {
+  .dashboard,
+  .dashboard-content,
+  .dashboard .dashboard-content,
+  .dashboard-component-tabs-content {
+    background: #ffffff !important;
+  }
+
+  .dashboard-component-chart-holder,
+  .dashboard-component-tabs,
+  .native-filters-container,
+  [data-test="filter-bar"] {
+    box-shadow: none !important;
+  }
+}
+
+/* ==========================================================================
+   18. GỢI Ý MÀU CHART — CẤU HÌNH TRONG EXPLORE / DASHBOARD PROPERTIES
+   ==========================================================================
+
+   CSS không đổi màu ổn định cho thanh/cột/donut khi ECharts render bằng canvas.
+   Hãy cấu hình Color Scheme trong Superset theo thứ tự gợi ý:
+
+   Tiếp nhận / Tổng hồ sơ       #d47282
+   Đang xử lý                   #d79a3f
+   Đã xử lý / Hoàn thành        #b85e73
+   Đúng hạn                     #c45d70
+   Quá hạn                      #c95063
+   Từ chối / Hủy                #a8789b
+
+   Tài chính:
+   - Thu ngân sách              #c45d70
+   - Chi ngân sách              #d79a3f
+   - Giải ngân                  #b85e73
+   - Chưa giải ngân             #a18b93
+   - Vượt dự toán / Cảnh báo    #c95063
+   ========================================================================== */
+
+/* ==========================================================================
+   19. V2 ROSE BLUSH OVERRIDES
+   Phong cách: đỏ hồng nhạt, sáng, hiện đại, vẫn nghiêm túc cho báo cáo nhà nước.
+   ========================================================================== */
+
+:root {
+  --gov-canvas: #fff4f6;
+  --gov-canvas-deep: #f8e4e8;
+  --gov-workspace: #fff8f9;
+  --gov-surface: #ffffff;
+  --gov-surface-soft: #fffafb;
+  --gov-surface-selected: #fceef1;
+
+  --gov-text: #3b2530;
+  --gov-text-secondary: #735761;
+  --gov-text-muted: #a18b93;
+  --gov-text-inverse: #ffffff;
+
+  --gov-border: #efd8dd;
+  --gov-border-strong: #dfbcc5;
+  --gov-border-focus: #c45d70;
+
+  --gov-primary: #c45d70;
+  --gov-primary-dark: #7f3043;
+  --gov-primary-soft: #fbe8ec;
+  --gov-cyan: #e08a96;
+  --gov-teal: #b85e73;
+  --gov-violet: #a8789b;
+
+  --gov-positive: #4f8a68;
+  --gov-positive-soft: #eaf6ef;
+  --gov-warning: #bd7d20;
+  --gov-warning-soft: #fff4dd;
+  --gov-negative: #c95063;
+  --gov-negative-soft: #fde8ec;
+
+  --gov-series-1: #c45d70;
+  --gov-series-2: #e07b89;
+  --gov-series-3: #d79a3f;
+  --gov-series-4: #a8789b;
+  --gov-series-5: #a83f55;
+
+  --gov-shadow-card:
+    0 2px 4px rgba(127, 48, 67, 0.035),
+    0 10px 26px rgba(196, 93, 112, 0.075);
+
+  --gov-shadow-hover:
+    0 6px 12px rgba(127, 48, 67, 0.055),
+    0 20px 42px rgba(196, 93, 112, 0.15);
+
+  --gov-shadow-filter:
+    8px 0 28px rgba(127, 48, 67, 0.045);
+
+  --gov-shadow-popover:
+    0 16px 34px rgba(92, 48, 61, 0.14);
+
+  --gov-focus-ring:
+    0 0 0 3px rgba(196, 93, 112, 0.16);
+}
+
+/* Nền blush rất nhạt, không nhuộm hồng quá mạnh */
+.dashboard,
+.dashboard-content,
+.dashboard .dashboard-content {
+  background:
+    radial-gradient(
+      circle at 91% 4%,
+      rgba(224, 123, 137, 0.14) 0,
+      rgba(224, 123, 137, 0) 28%
+    ),
+    radial-gradient(
+      circle at 7% 89%,
+      rgba(196, 93, 112, 0.07) 0,
+      rgba(196, 93, 112, 0) 24%
+    ),
+    linear-gradient(
+      180deg,
+      #fff4f6 0%,
+      #fff9fa 48%,
+      #fbecef 100%
+    ) !important;
+}
+
+.dashboard-component-tabs-content {
+  background:
+    linear-gradient(
+      180deg,
+      #fff5f7 0%,
+      #fffafa 48%,
+      #fdf1f3 100%
+    ) !important;
+}
+
+/* Card trắng, viền hồng xám nhẹ */
+.dashboard-component-chart-holder {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 76%,
+      #fffafb 100%
+    ) !important;
+  border-color: #ecd5da !important;
+  box-shadow:
+    0 2px 5px rgba(127, 48, 67, 0.035),
+    0 10px 26px rgba(196, 93, 112, 0.075) !important;
+}
+
+.dashboard-component-chart-holder:hover {
+  border-color: #d98d9c !important;
+  box-shadow:
+    0 5px 12px rgba(127, 48, 67, 0.055),
+    0 20px 40px rgba(196, 93, 112, 0.14) !important;
+}
+
+/* Header chart màu hồng trắng dịu */
+.chart-header {
+  background:
+    linear-gradient(
+      180deg,
+      #fffdfd 0%,
+      #fff2f4 100%
+    ) !important;
+  border-bottom-color: #efdce0 !important;
+}
+
+.chart-header h4,
+.dashboard-chart-title,
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title a,
+.dashboard-component-chart-holder .editable-title--editable {
+  color: #723746 !important;
+}
+
+/* Tab đang chọn */
+.nav-tabs .nav-link.active {
+  color: #7f3043 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #fbe7eb 0%,
+      #fff8f9 100%
+    ) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(196, 93, 112, 0.25),
+    0 5px 14px rgba(196, 93, 112, 0.10) !important;
+}
+
+/* Filter panel đồng nhất tone */
+.filter_box,
+.native-filters-container,
+[data-test="filter-bar"] {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fff9fa 56%,
+      #fceef1 100%
+    ) !important;
+  border-right-color: #efd8dd !important;
+  box-shadow:
+    7px 0 24px rgba(127, 48, 67, 0.045),
+    inset -1px 0 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Nút áp dụng filter */
+.native-filters-container button[type="submit"],
+[data-test="filter-bar"] button[type="submit"] {
+  background:
+    linear-gradient(
+      135deg,
+      #d36d7e,
+      #a84459
+    ) !important;
+  border-color: #c45d70 !important;
+  box-shadow: 0 7px 16px rgba(196, 93, 112, 0.22) !important;
+}
+
+/* KPI nền hồng rất nhạt theo màu trạng thái */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number),
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"]),
+.dashboard-component-chart-holder:has(.big-number) {
+  background:
+    radial-gradient(
+      circle at 94% 10%,
+      rgba(var(--kpi-accent-rgb), 0.11) 0,
+      rgba(var(--kpi-accent-rgb), 0) 31%
+    ),
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #fff9fa 58%,
+      #fceff2 100%
+    ) !important;
+  border-color: rgba(var(--kpi-accent-rgb), 0.28) !important;
+}
+
+/* KPI thứ tự: tổng, tiếp nhận, hoàn thành, cảnh báo, quá hạn, từ chối */
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(1)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(1)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #c45d70;
+  --kpi-accent-rgb: 196, 93, 112;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(2)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(2)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #e07b89;
+  --kpi-accent-rgb: 224, 123, 137;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(3)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(3)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #4f8a68;
+  --kpi-accent-rgb: 79, 138, 104;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(4)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(4)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #d79a3f;
+  --kpi-accent-rgb: 215, 154, 63;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(5)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(5)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #c95063;
+  --kpi-accent-rgb: 201, 80, 99;
+}
+
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(6)
+  .dashboard-component-chart-holder:has(.big-number),
+.dragdroppable-row:first-of-type
+  > .dragdroppable-column:nth-of-type(6)
+  .dashboard-component-chart-holder:has(.superset-legacy-chart-big-number) {
+  --kpi-accent: #a8789b;
+  --kpi-accent-rgb: 168, 120, 155;
+}
+
+/* Header bảng đỏ hồng đậm, chữ trắng */
+.dashboard-markdown th,
+.table-chart thead,
+.pivot-table thead,
+.table-chart thead th,
+.pivot-table thead th,
+.dashboard-chart th {
+  background:
+    linear-gradient(
+      180deg,
+      #b75065 0%,
+      #833247 100%
+    ) !important;
+}
+
+/* Dòng hover bảng */
+.table-chart tbody tr:hover,
+.pivot-table tbody tr:hover,
+.dashboard-markdown tbody tr:hover,
+.dashboard-chart tbody tr:hover {
+  background: #fff0f3 !important;
+  box-shadow: inset 3px 0 0 #c45d70 !important;
+}
+
+/* Tiêu đề dashboard và phân khu */
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header:has(h1) .header-title,
+.dashboard-component-header:has(h2) .header-title,
+.dashboard-component-header:has(h1) .editable-title a,
+.dashboard-component-header:has(h2) .editable-title a {
+  color: #7f3043 !important;
+}
+
+.dashboard-component-header h3,
+.dashboard-component-header:has(h3) .header-title,
+.dashboard-markdown .dashboard-component-chart-holder > p,
+.dashboard-markdown p {
+  color: #9b4356 !important;
+}
+
+/* Vạch tiêu đề Markdown */
+.dashboard-markdown .dashboard-component-chart-holder::before {
+  background:
+    linear-gradient(
+      180deg,
+      #c45d70,
+      #e08a96
+    ) !important;
+}
+
+/* Color Scheme gợi ý:
+   Tiếp nhận / Tổng hồ sơ       #C45D70
+   Đang xử lý                   #D79A3F
+   Đã xử lý / Hoàn thành        #4F8A68
+   Đúng hạn                     #E07B89
+   Quá hạn                      #C95063
+   Từ chối / Hủy                #A8789B
+
+   Tài chính:
+   Thu ngân sách                #C45D70
+   Chi ngân sách                #E07B89
+   Giải ngân                    #4F8A68
+   Chưa giải ngân               #A18B93
+   Vượt dự toán / Cảnh báo      #C95063
+*/
+
+
+/* ==========================================================================
+   20. V3 RUBY WHITE OVERRIDES
+   Nền đỏ ruby đậm hơn, chữ trắng trên các vùng tiêu đề và điều hướng.
+   Phần nội dung biểu đồ/bảng vẫn giữ nền sáng để số liệu dễ đọc.
+   ========================================================================== */
+
+:root {
+  --gov-canvas: #f6e3e7;
+  --gov-canvas-deep: #ebcbd2;
+  --gov-workspace: #fbedf0;
+  --gov-surface: #ffffff;
+  --gov-surface-soft: #fff7f8;
+  --gov-surface-selected: #f8dfe4;
+
+  --gov-text: #3a2029;
+  --gov-text-secondary: #6f505a;
+  --gov-text-muted: #9c838b;
+  --gov-text-inverse: #ffffff;
+
+  --gov-border: #e6c7ce;
+  --gov-border-strong: #cf9eaa;
+  --gov-border-focus: #b94158;
+
+  --gov-primary: #b94158;
+  --gov-primary-dark: #7e2337;
+  --gov-primary-soft: #f5d8de;
+  --gov-cyan: #d76f80;
+  --gov-teal: #a83f55;
+  --gov-violet: #8f5a7d;
+
+  --gov-positive: #4f8a68;
+  --gov-positive-soft: #eaf6ef;
+  --gov-warning: #bd7d20;
+  --gov-warning-soft: #fff4dd;
+  --gov-negative: #d34f64;
+  --gov-negative-soft: #fde8ec;
+
+  --gov-series-1: #b94158;
+  --gov-series-2: #d76f80;
+  --gov-series-3: #d59a3f;
+  --gov-series-4: #8f5a7d;
+  --gov-series-5: #7e2337;
+
+  --gov-shadow-card:
+    0 3px 7px rgba(126, 35, 55, 0.055),
+    0 12px 30px rgba(185, 65, 88, 0.11);
+
+  --gov-shadow-hover:
+    0 7px 15px rgba(126, 35, 55, 0.08),
+    0 22px 46px rgba(185, 65, 88, 0.19);
+
+  --gov-shadow-filter:
+    8px 0 30px rgba(102, 25, 43, 0.11);
+
+  --gov-shadow-popover:
+    0 16px 36px rgba(83, 22, 37, 0.20);
+
+  --gov-focus-ring:
+    0 0 0 3px rgba(185, 65, 88, 0.22);
+}
+
+
+/* ==========================================================================
+   20.1 NỀN DASHBOARD — ĐỎ HỒNG RÕ HƠN
+   ========================================================================== */
+
+.dashboard,
+.dashboard-content,
+.dashboard .dashboard-content {
+  color: var(--gov-text) !important;
+
+  background:
+    radial-gradient(
+      circle at 91% 3%,
+      rgba(190, 65, 89, 0.22) 0,
+      rgba(190, 65, 89, 0) 28%
+    ),
+    radial-gradient(
+      circle at 5% 91%,
+      rgba(126, 35, 55, 0.12) 0,
+      rgba(126, 35, 55, 0) 25%
+    ),
+    linear-gradient(
+      180deg,
+      #f2d9df 0%,
+      #faeaed 48%,
+      #edcfd6 100%
+    ) !important;
+}
+
+.dashboard-component-tabs-content {
+  background:
+    linear-gradient(
+      180deg,
+      #f5dfe4 0%,
+      #fceef1 52%,
+      #f1d8de 100%
+    ) !important;
+}
+
+
+/* ==========================================================================
+   20.2 THANH HEADER TRÊN CÙNG
+   ========================================================================== */
+
+.dashboard-header {
+  background:
+    linear-gradient(
+      135deg,
+      #a9344c 0%,
+      #7e2337 100%
+    ) !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+
+  box-shadow:
+    0 7px 22px rgba(102, 25, 43, 0.24) !important;
+}
+
+.dashboard-header h1,
+.dashboard-header .header-title,
+.dashboard-header .editable-title,
+.dashboard-header .editable-title a {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(75, 16, 30, 0.25) !important;
+}
+
+.dashboard-header button,
+.dashboard-header [role="button"] {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.dashboard-header button:hover,
+.dashboard-header [role="button"]:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+
+/* ==========================================================================
+   20.3 TAB — ACTIVE ĐỎ ĐẬM, CHỮ TRẮNG
+   ========================================================================== */
+
+.dashboard-component-tabs {
+  border-color: #d9abb5 !important;
+  box-shadow:
+    0 2px 5px rgba(126, 35, 55, 0.06),
+    0 10px 28px rgba(185, 65, 88, 0.10) !important;
+}
+
+.nav-tabs {
+  background:
+    linear-gradient(
+      180deg,
+      #fff8f9 0%,
+      #f7e4e8 100%
+    ) !important;
+  border-bottom-color: #e2bcc5 !important;
+}
+
+.nav-tabs .nav-link {
+  color: #754955 !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: #7e2337 !important;
+  background: rgba(185, 65, 88, 0.10) !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      135deg,
+      #c24e65 0%,
+      #85273b 100%
+    ) !important;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 6px 16px rgba(126, 35, 55, 0.22) !important;
+}
+
+.nav-tabs .nav-link.active::after {
+  background: #ffffff !important;
+  opacity: 0.92 !important;
+}
+
+
+/* ==========================================================================
+   20.4 FILTER PANEL — NỀN ĐỎ ĐẬM, CHỮ TRẮNG
+   ========================================================================== */
+
+.filter_box,
+.native-filters-container,
+[data-test="filter-bar"] {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #a9344c 0%,
+      #8b293e 56%,
+      #6e1d31 100%
+    ) !important;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+
+  box-shadow:
+    8px 0 30px rgba(102, 25, 43, 0.17),
+    inset -1px 0 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+.native-filters-container h3,
+.native-filters-container h4,
+[data-test="filter-bar"] h3,
+[data-test="filter-bar"] h4 {
+  color: #ffffff !important;
+}
+
+.native-filters-container label,
+[data-test="filter-bar"] label {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-test="filter-bar"] [class*="out-of-scope"],
+.native-filters-container [class*="out-of-scope"] {
+  color: rgba(255, 255, 255, 0.60) !important;
+}
+
+.native-filters-container input,
+.native-filters-container .ant-select-selector,
+.native-filters-container .Select-control,
+[data-test="filter-bar"] input,
+[data-test="filter-bar"] .ant-select-selector,
+[data-test="filter-bar"] .Select-control {
+  color: #4a2630 !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(255, 255, 255, 0.62) !important;
+
+  box-shadow:
+    0 3px 9px rgba(75, 16, 30, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96) !important;
+}
+
+.native-filters-container button,
+[data-test="filter-bar"] button {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.native-filters-container button[type="submit"],
+[data-test="filter-bar"] button[type="submit"] {
+  color: #7e2337 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8e4e8 100%
+    ) !important;
+
+  border-color: rgba(255, 255, 255, 0.75) !important;
+
+  box-shadow:
+    0 7px 17px rgba(75, 16, 30, 0.22) !important;
+}
+
+.native-filters-container button[type="submit"]:hover,
+[data-test="filter-bar"] button[type="submit"]:hover {
+  color: #651829 !important;
+  background: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   20.5 TIÊU ĐỀ DASHBOARD VÀ TIÊU ĐỀ PHÂN KHU
+   Giữ dạng phẳng, không viền bo tròn.
+   ========================================================================== */
+
+.dashboard-component-header {
+  min-height: 52px !important;
+  padding: 8px 48px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9d3047 0%,
+      #b94158 55%,
+      #8a293e 100%
+    ) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  box-shadow:
+    0 7px 20px rgba(126, 35, 55, 0.18) !important;
+}
+
+.dashboard-component-header h1,
+.dashboard-component-header h2,
+.dashboard-component-header h3,
+.dashboard-component-header .header-title,
+.dashboard-component-header .editable-title,
+.dashboard-component-header .editable-title a,
+.dashboard-component-header .editable-title--editable {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(75, 16, 30, 0.28) !important;
+}
+
+.dashboard-component-header:hover {
+  background:
+    linear-gradient(
+      90deg,
+      #a7344b 0%,
+      #c44d64 55%,
+      #8a293e 100%
+    ) !important;
+
+  box-shadow:
+    0 9px 24px rgba(126, 35, 55, 0.22) !important;
+}
+
+
+/* Markdown title: nền đỏ phẳng, chữ trắng */
+.dashboard-markdown,
+.dashboard-markdown > .resizable-container {
+  background: transparent !important;
+}
+
+.dashboard-markdown .dashboard-component-chart-holder {
+  position: relative !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9d3047 0%,
+      #b94158 62%,
+      #8a293e 100%
+    ) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  box-shadow:
+    0 6px 18px rgba(126, 35, 55, 0.16) !important;
+}
+
+.dashboard-markdown .dashboard-component-chart-holder:hover {
+  background:
+    linear-gradient(
+      90deg,
+      #a7344b 0%,
+      #c44d64 62%,
+      #8a293e 100%
+    ) !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  box-shadow:
+    0 8px 22px rgba(126, 35, 55, 0.20) !important;
+}
+
+.dashboard-markdown .dashboard-component-chart-holder > p,
+.dashboard-markdown p {
+  color: #ffffff !important;
+  font-weight: 720 !important;
+  text-shadow: 0 1px 2px rgba(75, 16, 30, 0.26) !important;
+}
+
+
+/* ==========================================================================
+   20.6 CHART CARD VÀ CHART HEADER
+   ========================================================================== */
+
+.dashboard-component-chart-holder {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 76%,
+      #fff8f9 100%
+    ) !important;
+
+  border-color: #e1bdc5 !important;
+
+  box-shadow:
+    0 3px 8px rgba(126, 35, 55, 0.055),
+    0 13px 32px rgba(185, 65, 88, 0.12) !important;
+}
+
+.dashboard-component-chart-holder:hover {
+  border-color: #cb7486 !important;
+
+  box-shadow:
+    0 7px 16px rgba(126, 35, 55, 0.08),
+    0 23px 46px rgba(185, 65, 88, 0.20) !important;
+}
+
+.chart-header {
+  background:
+    linear-gradient(
+      135deg,
+      #bd485f 0%,
+      #7e2337 100%
+    ) !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.13) !important;
+}
+
+.chart-header h4,
+.dashboard-chart-title,
+.dashboard-component-chart-holder .header-title,
+.dashboard-component-chart-holder .editable-title a,
+.dashboard-component-chart-holder .editable-title--editable {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(75, 16, 30, 0.25) !important;
+}
+
+.chart-header button,
+.chart-header [role="button"] {
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.chart-header button:hover,
+.chart-header [role="button"]:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.17) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+}
+
+
+/* ==========================================================================
+   20.7 KPI CARD — NỀN RUBY, TOÀN BỘ CHỮ TRẮNG
+   ========================================================================== */
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number),
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"]),
+.dashboard-component-chart-holder:has(.big-number) {
+  background:
+    radial-gradient(
+      circle at 92% 10%,
+      rgba(255, 255, 255, 0.15) 0,
+      rgba(255, 255, 255, 0) 31%
+    ),
+    linear-gradient(
+      145deg,
+      #c34c63 0%,
+      #9b3047 56%,
+      #6e1d31 100%
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 12px 30px rgba(126, 35, 55, 0.23) !important;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number):hover,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"]):hover,
+.dashboard-component-chart-holder:has(.big-number):hover {
+  border-color: rgba(255, 255, 255, 0.32) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    0 20px 44px rgba(126, 35, 55, 0.30) !important;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header,
+.dashboard-component-chart-holder:has(.big-number)
+  .chart-header {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .chart-header h4,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .header-title,
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)
+  .editable-title a,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])
+  .chart-header h4,
+.dashboard-component-chart-holder:has(.big-number)
+  .chart-header h4 {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.superset-legacy-chart-big-number .header-line,
+.superset-legacy-chart-big-number .big-number,
+.big-number {
+  color: #ffffff !important;
+  text-shadow:
+    0 1px 2px rgba(75, 16, 30, 0.26),
+    0 4px 14px rgba(75, 16, 30, 0.18) !important;
+}
+
+.superset-legacy-chart-big-number .subheader-line,
+.subheader-line,
+.big-number-subheader {
+  color: rgba(255, 255, 255, 0.76) !important;
+}
+
+.superset-legacy-chart-big-number .trend-line,
+.superset-legacy-chart-big-number .comparison {
+  color: #ffffff !important;
+
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Dải sáng trên KPI */
+.dashboard-component-chart-holder:has(.superset-legacy-chart-big-number)::before,
+.dashboard-component-chart-holder:has([data-test-viz-type="big_number_total"])::before,
+.dashboard-component-chart-holder:has(.big-number)::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.52) 68%,
+      rgba(255, 255, 255, 0.16) 100%
+    ) !important;
+}
+
+
+/* ==========================================================================
+   20.8 BẢNG — HEADER RUBY, CHỮ TRẮNG
+   ========================================================================== */
+
+.dashboard-markdown th,
+.table-chart thead,
+.pivot-table thead,
+.table-chart thead th,
+.pivot-table thead th,
+.dashboard-chart th {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ae3b53 0%,
+      #721f33 100%
+    ) !important;
+
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.table-chart tbody tr:nth-child(even),
+.pivot-table tbody tr:nth-child(even),
+.dashboard-markdown tbody tr:nth-child(even),
+.dashboard-chart tbody tr:nth-child(even) {
+  background: #fff5f7 !important;
+}
+
+.table-chart tbody tr:hover,
+.pivot-table tbody tr:hover,
+.dashboard-markdown tbody tr:hover,
+.dashboard-chart tbody tr:hover {
+  background: #fbe1e6 !important;
+  box-shadow: inset 4px 0 0 #b94158 !important;
+}
+
+.dashboard-chart td:first-child,
+.table-chart td:first-child,
+.pivot-table td:first-child {
+  color: #7e2337 !important;
+  background: rgba(245, 216, 222, 0.55) !important;
+}
+
+
+/* ==========================================================================
+   20.9 POPOVER, TOOLTIP, SCROLLBAR
+   ========================================================================== */
+
+.ant-select-dropdown,
+.ant-popover-inner,
+.popover,
+[role="listbox"] {
+  border-color: #dfb4bd !important;
+  box-shadow: 0 18px 38px rgba(102, 25, 43, 0.20) !important;
+}
+
+.dashboard-component-chart-holder .tooltip,
+.dashboard-component-chart-holder [class*="tooltip"] {
+  border-color: #dfb4bd !important;
+  box-shadow: 0 16px 34px rgba(102, 25, 43, 0.18) !important;
+}
+
+.dashboard ::-webkit-scrollbar-thumb,
+.native-filters-container::-webkit-scrollbar-thumb,
+[data-test="filter-bar"]::-webkit-scrollbar-thumb {
+  background: #cf9eaa !important;
+}
+
+.dashboard ::-webkit-scrollbar-thumb:hover,
+.native-filters-container::-webkit-scrollbar-thumb:hover,
+[data-test="filter-bar"]::-webkit-scrollbar-thumb:hover {
+  background: #b65b70 !important;
+}
+
+
+/* ==========================================================================
+   20.10 RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .dashboard-component-header {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+
+  .dashboard-markdown .dashboard-component-chart-holder {
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+}
+
+
+/* Color Scheme gợi ý V3 Ruby White:
+   Tổng hồ sơ / Tiếp nhận      #B94158
+   Đang xử lý                  #D59A3F
+   Hoàn thành                  #4F8A68
+   Đúng hạn                    #D76F80
+   Quá hạn                     #D34F64
+   Từ chối / Hủy               #8F5A7D
+
+   Tài chính:
+   Thu ngân sách               #B94158
+   Chi ngân sách               #D76F80
+   Giải ngân                   #4F8A68
+   Chưa giải ngân              #9C838B
+   Vượt dự toán / Cảnh báo     #D34F64
+*/
