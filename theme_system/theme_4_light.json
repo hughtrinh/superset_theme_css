@@ -1,0 +1,56 @@
+{
+  "token": {
+    "colorPrimary": "#0B7774",
+    "colorInfo": "#2F79B7",
+    "colorSuccess": "#218455",
+    "colorWarning": "#BA7119",
+    "colorError": "#C64D58",
+    "colorBgBase": "#F3FAF9",
+    "colorBgContainer": "#FFFFFF",
+    "colorBgElevated": "#FFFFFF",
+    "colorBgLayout": "#DFEEED",
+    "colorText": "#143235",
+    "colorTextSecondary": "#49666A",
+    "colorTextTertiary": "#80979A",
+    "colorBorder": "#C7DCDA",
+    "colorBorderSecondary": "#DCEAE8",
+    "borderRadius": 10,
+    "borderRadiusLG": 16,
+    "borderRadiusSM": 8,
+    "fontFamily": "Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif",
+    "fontSize": 14,
+    "controlHeight": 36,
+    "controlHeightLG": 40,
+    "boxShadow": "0 8px 24px rgba(27, 82, 80, 0.08)",
+    "boxShadowSecondary": "0 16px 36px rgba(20, 50, 53, 0.14)"
+  },
+  "components": {
+    "Button": {
+      "borderRadius": 9,
+      "primaryShadow": "0 6px 14px rgba(11, 119, 116, 0.20)"
+    },
+    "Card": {
+      "borderRadiusLG": 16
+    },
+    "Table": {
+      "headerBg": "#0B7774",
+      "headerColor": "#FFFFFF",
+      "rowHoverBg": "#E9F6F4",
+      "borderColor": "#C7DCDA"
+    },
+    "Tabs": {
+      "itemColor": "#49666A",
+      "itemSelectedColor": "#075956",
+      "itemHoverColor": "#0B7774",
+      "inkBarColor": "#0B7774"
+    },
+    "Select": {
+      "optionSelectedBg": "#E9F6F4",
+      "optionSelectedColor": "#075956"
+    },
+    "Input": {
+      "activeBorderColor": "#0B7774",
+      "hoverBorderColor": "#2B9C96"
+    }
+  }
+}
